@@ -1,16 +1,17 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import logo from '../assets/images/logo.png';
-import Flag from 'react-world-flags';
+import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
+import logo from "../assets/images/logo.png";
+import Flag from "react-world-flags";
 import "../assets/css/style.css";
 import { Search, Menu, X, ChevronDown, ChevronUp } from "lucide-react";
-import profile from "../assets/images/profile.png"
-import { 
-  FaChevronDown, 
-  FaThLarge, 
-  FaAngleRight, 
-  FaBook, 
-  FaGraduationCap, 
+import profile from "../assets/images/profile.png";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  FaChevronDown,
+  FaThLarge,
+  FaAngleRight,
+  FaBook,
+  FaGraduationCap,
   FaCertificate,
   FaEnvelope,
   FaHtml5,
@@ -23,41 +24,49 @@ import {
   FaDatabase,
   FaServer,
   FaCode,
-  FaUserCircle
-} from 'react-icons/fa';
-import { SiAngular, SiVuedotjs, SiDotnet, SiSwift, SiPostgresql, SiMongodb } from 'react-icons/si';
-import { DiRuby } from 'react-icons/di';
-import { useAuth } from '../pages/Auth/AuthContext';
-import { useNavigate } from 'react-router-dom';
+  FaUserCircle,
+} from "react-icons/fa";
+import {
+  SiAngular,
+  SiVuedotjs,
+  SiDotnet,
+  SiSwift,
+  SiPostgresql,
+  SiMongodb,
+} from "react-icons/si";
+import { DiRuby } from "react-icons/di";
+import { useAuth } from "../pages/Auth/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [activeCategory, setActiveCategory] = useState('it');
+  const [activeCategory, setActiveCategory] = useState("it");
   const [mobileCategoryOpen, setMobileCategoryOpen] = useState(null);
   const dropdownRef = useRef(null);
   const mobileMenuRef = useRef(null);
-  const [language, setLanguage] = useState('en-IN');
+  const [language, setLanguage] = useState("en-IN");
   const [isOpen, setIsOpen] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const scrollContainerRef = useRef(null);
   const [isMobileView, setIsMobileView] = useState(false);
   const [isOpen_, setIsOpen_] = useState(false);
-  
+  const [isOpenc, setIsOpenc] = useState(false);
+
   useEffect(() => {
     const checkScreenSize = () => {
       setIsMobileView(window.innerWidth <= 1080);
     };
     checkScreenSize();
-    window.addEventListener('resize', checkScreenSize);
-    return () => window.removeEventListener('resize', checkScreenSize);
+    window.addEventListener("resize", checkScreenSize);
+    return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
 
   const handleLogout = () => {
     logout();
-    navigate('/');
+    navigate("/");
   };
 
   const toggleDropdown = () => {
@@ -87,19 +96,21 @@ const Navbar = () => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setIsDropdownOpen(false);
       }
-      if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target)) {
+      if (
+        mobileMenuRef.current &&
+        !mobileMenuRef.current.contains(event.target)
+      ) {
         setMobileMenuOpen(false);
+        setIsOpenc(false);
       }
     };
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 
-  const languages = [
-    { code: 'en-IN', label: 'En-In' },
-  ];
+  const languages = [{ code: "en-IN", label: "En-In" }];
 
   const toggleDropdownL = () => setIsOpen(!isOpen);
 
@@ -109,32 +120,32 @@ const Navbar = () => {
   };
 
   const techIcons = {
-    'HTML5': <FaHtml5 className="text-orange-500" />,
-    'CSS': <FaCss3Alt className="text-blue-500" />,
-    'JavaScript': <FaJs className="text-yellow-400" />,
-    'React': <FaReact className="text-blue-400" />,
-    'Angular': <SiAngular className="text-red-500" />,
-    'Vue.js': <SiVuedotjs className="text-green-500" />,
-    'Node.js': <FaNodeJs className="text-green-600" />,
-    'PHP': <span className="text-purple-500">PHP</span>,
-    'Python': <FaPython className="text-blue-600" />,
-    'Java': <FaJava className="text-red-400" />,
-    'Ruby': <DiRuby className="text-red-600" />,
-    '.NET': <SiDotnet className="text-purple-600" />,
-    'SQL': <FaDatabase className="text-blue-300" />,
-    'MongoDB': <SiMongodb className="text-green-500" />,
-    'PostgreSQL': <SiPostgresql className="text-blue-400" />,
-    'Data Structures': <FaCode className="text-yellow-500" />,
-    'Algorithms': <FaCode className="text-purple-400" />,
-    'C++': <span className="text-blue-500">C++</span>,
-    'C#': <span className="text-purple-500">C#</span>,
-    'Swift': <SiSwift className="text-orange-400" />,
-    'Computer Networks': <FaServer className="text-green-400" />,
-    'Operating Systems': <FaServer className="text-gray-500" />,
-    'DBMS': <FaDatabase className="text-blue-500" />,
-    'OOP': <FaCode className="text-red-500" />,
-    'System Design': <FaServer className="text-indigo-500" />,
-    'view more →': <FaAngleRight className="text-blue-500" />
+    HTML5: <FaHtml5 className="text-orange-500" />,
+    CSS: <FaCss3Alt className="text-blue-500" />,
+    JavaScript: <FaJs className="text-yellow-400" />,
+    React: <FaReact className="text-blue-400" />,
+    Angular: <SiAngular className="text-red-500" />,
+    "Vue.js": <SiVuedotjs className="text-green-500" />,
+    "Node.js": <FaNodeJs className="text-green-600" />,
+    PHP: <span className="text-purple-500">PHP</span>,
+    Python: <FaPython className="text-blue-600" />,
+    Java: <FaJava className="text-red-400" />,
+    Ruby: <DiRuby className="text-red-600" />,
+    ".NET": <SiDotnet className="text-purple-600" />,
+    SQL: <FaDatabase className="text-blue-300" />,
+    MongoDB: <SiMongodb className="text-green-500" />,
+    PostgreSQL: <SiPostgresql className="text-blue-400" />,
+    "Data Structures": <FaCode className="text-yellow-500" />,
+    Algorithms: <FaCode className="text-purple-400" />,
+    "C++": <span className="text-blue-500">C++</span>,
+    "C#": <span className="text-purple-500">C#</span>,
+    Swift: <SiSwift className="text-orange-400" />,
+    "Computer Networks": <FaServer className="text-green-400" />,
+    "Operating Systems": <FaServer className="text-gray-500" />,
+    DBMS: <FaDatabase className="text-blue-500" />,
+    OOP: <FaCode className="text-red-500" />,
+    "System Design": <FaServer className="text-indigo-500" />,
+    "view more →": <FaAngleRight className="text-blue-500" />,
   };
 
   const categories = {
@@ -144,51 +155,95 @@ const Navbar = () => {
         {
           title: "Technology Stack",
           items: [
-            'HTML5', 'CSS', 'JavaScript', 'React', 'Angular', 'Vue.js',
-            'Node.js', 'PHP', 'Python', 'Java', 'Ruby', '.NET',
-            'SQL', 'MongoDB', 'PostgreSQL', 'Data Structures', 'Algorithms',
-            'Python', 'JavaScript', 'Java', 'C++', 'C#', 'Swift', 'view more →'
+            "HTML5",
+            "CSS",
+            "JavaScript",
+            "React",
+            "Angular",
+            "Vue.js",
+            "Node.js",
+            "PHP",
+            "Python",
+            "Java",
+            "Ruby",
+            ".NET",
+            "SQL",
+            "MongoDB",
+            "PostgreSQL",
+            "Data Structures",
+            "Algorithms",
+            "Python",
+            "JavaScript",
+            "Java",
+            "C++",
+            "C#",
+            "Swift",
+            "view more →",
           ],
           color: "bg-gradient-to-r from-blue-50 via-purple-50 to-green-50",
-          isScrollingFrame: true
+          isScrollingFrame: true,
         },
         {
           title: "Core Subjects",
-          items: ['Computer Networks', 'Operating Systems', 'DBMS', 'OOP', 'System Design', 'view more →'],
-          color: "bg-red-50"
-        }
+          items: [
+            "Computer Networks",
+            "Operating Systems",
+            "DBMS",
+            "OOP",
+            "System Design",
+            "view more →",
+          ],
+          color: "bg-red-50",
+          isScrollingFrame: true,
+        },
       ],
-      icon: '💻'
+      icon: "💻",
     },
     government: {
       title: "Government Exams",
       sections: [
         {
           title: "Centeral Exam",
-          items: ['SSC CGL', 'SSC CHSL', 'SSC GD', 'SSC MTS', 'SSC Stenographer', 'view more →'],
-          color: "bg-indigo-50"
+          items: [
+            "SSC CGL",
+            "SSC CHSL",
+            "SSC GD",
+            "SSC MTS",
+            "SSC Stenographer",
+            "view more →",
+          ],
+          color: "bg-indigo-50",
+          isScrollingFrame: true,
         },
         {
           title: "State Exam",
-          items: ['SSC CGL', 'SSC CHSL', 'SSC GD', 'SSC MTS', 'SSC Stenographer', 'view more →'],
-          color: "bg-indigo-50"
-        }
+          items: [
+            "SSC CGL",
+            "SSC CHSL",
+            "SSC GD",
+            "SSC MTS",
+            "SSC Stenographer",
+            "view more →",
+          ],
+          color: "bg-indigo-50",
+          isScrollingFrame: true,
+        },
       ],
-      icon: '🏛️'
+      icon: "🏛️",
     },
     bank: {
       title: "Banking Exams",
-      items: ['Coming Soon'],
-      icon: '🏦'
-    }
+      items: ["Coming Soon"],
+      icon: "🏦",
+    },
   };
 
   const navLinks = [
-    { icon: <FaBook />, label: 'Library' },
-    { icon: <FaGraduationCap />, label: 'Courses' },
-    { icon: <FaCertificate />, label: 'Certifications' },
+    { icon: <FaBook />, label: "Library" },
+    { icon: <FaGraduationCap />, label: "Courses" },
+    { icon: <FaCertificate />, label: "Certifications" },
   ];
-  
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -221,49 +276,62 @@ const Navbar = () => {
                 alt="User photo"
               />
             </button>
-    
+
             {/* Dropdown Menu */}
             {isOpen_ && (
               <div
-                id="dropdownAvatar"
-                className="absolute right-0 z-20 mt-3 w-52 bg-white dark:bg-gray-800 shadow-xl rounded-xl border border-gray-100 dark:border-gray-700 animate-fadeIn"
-              >
-                <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
-                  <li>
-                    <a
-                      href="/dashboard"
-                      className="flex gap-2 px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white transition-all duration-200"
-                    >
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="12" cy="12" r="10"></circle>
-            <polyline points="12 6 12 12 16 14"></polyline>
-          </svg>Dashboard
-                    </a>
-                  </li>
-                  <li className="flex gap-2 px-4 py-2 text-[red] cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700  transition-all duration-200" onClick={handleLogout}>
-                  <svg
-                      className="w-5 h-5 rotate-180"
+              id="dropdownAvatar"
+              className="absolute right-0 z-20 mt-3 w-52 bg-white shadow-xl rounded-xl border border-gray-100 animate-fadeIn"
+            >
+              <ul className="py-2 text-sm text-gray-700">
+                <li>
+                  <a
+                    href="/dashboard"
+                    className="flex gap-2 px-4 py-2 hover:bg-gray-100 transition-all duration-200"
+                  >
+                    <svg
+                      width="20"
+                      height="20"
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="currentColor"
                       strokeWidth="1.5"
                       strokeLinecap="round"
                       strokeLinejoin="round"
+                      xmlns="http://www.w3.org/2000/svg"
                     >
-                      <path d="M15.75 8.25L19.5 12L15.75 15.75" />
-                      <path d="M19.5 12H9.75" />
-                      <path d="M9.75 19.5H6C5.17 19.5 4.5 18.83 4.5 18V6C4.5 5.17 5.17 4.5 6 4.5H9.75" />
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <polyline points="12 6 12 12 16 14"></polyline>
                     </svg>
-                    <span>Logout</span>
-                  </li>
-                </ul>
-              </div>
+                    Dashboard
+                  </a>
+                </li>
+                <li
+                  className="flex gap-2 px-4 py-2 text-[red] cursor-pointer hover:bg-gray-100 transition-all duration-200"
+                  onClick={handleLogout}
+                >
+                  <svg
+                    className="w-5 h-5 rotate-180"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M15.75 8.25L19.5 12L15.75 15.75" />
+                    <path d="M19.5 12H9.75" />
+                    <path d="M9.75 19.5H6C5.17 19.5 4.5 18.83 4.5 18V6C4.5 5.17 5.17 4.5 6 4.5H9.75" />
+                  </svg>
+                  <span>Logout</span>
+                </li>
+              </ul>
+            </div>
             )}
           </div>
         </div>
       );
-    }
-    else {
+    } else {
       return (
         <a
           href="/login"
@@ -304,50 +372,65 @@ const Navbar = () => {
     }
   };
 
-  const renderMobileAuthButton = () => {
-    if (user) {
-      return (
-        <div className="mt-4">
-          <div className="flex items-center justify-center mb-3">
-            <FaUserCircle className="text-3xl text-[#0a63b0] mr-2" />
-            <span className="font-medium text-lg">{user.email}</span>
-          </div>
-          <button
-            onClick={handleLogout}
-            className="w-full py-3 text-center border-2 border-[#0a63b0] bg-[#0a63b0] text-white rounded-md font-bold text-lg"
-          >
-            Logout
-          </button>
-        </div>
-      );
-    } else {
-      return (
-        <a
-          href="/login"
-          className="block mt-4 py-3 text-center border-2 border-[#0a63b0] bg-[#0a63b0] text-white rounded-md font-bold text-lg"
-        >
-          Login
-        </a>
-      );
-    }
-  };
-
   return (
     <header className="bg-white shadow-md sticky top-0 z-50 w-full">
       {/* Top bar for contact information */}
       <div className="bg-[#0a63b0] flex justify-between items-center px-2 sm:px-4 py-1 w-full">
-        <div className="text-white text-xs sm:text-sm hover:text-blue-200 transition-colors duration-300 flex items-center">
-          <FaEnvelope className="mr-1 sm:mr-2" />
-          mail: prep_point@gmail.com
-        </div>
+        {!isMobileView && (
+          <div className="text-white text-xs sm:text-sm hover:text-blue-200 transition-colors duration-300 flex items-center">
+            <FaEnvelope className="mr-1 sm:mr-2" />
+            mail: prep_point@gmail.com
+          </div>
+        )}
+        {isMobileView && (
+          <button
+            className="text-gray-100 focus:outline-none"
+            onClick={toggleMobileMenu}
+          >
+            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        )}
+        {isMobileView && (
+          <button
+            onClick={() => setIsOpenc(!isOpenc)}
+            className="flex items-center justify-between px-4 py-2 text-gray-100 rounded-md"
+          >
+            <span>Categories</span>
+            <svg
+              className={`w-5 h-5 ml-2 transition-transform ${
+                isOpenc ? "transform rotate-180" : ""
+              }`}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </button>
+        )}
         <div className="relative">
           <button
             onClick={toggleDropdownL}
             className="flex items-center space-x-1 sm:space-x-2 px-2 sm:px-4 py-1 rounded-lg text-white bg-[#0a63b0] focus:outline-none transition-all duration-300"
           >
-            <Flag code={language === 'en-IN' ? 'IN' : language} className="w-4 h-4 sm:w-6 sm:h-6" />
-            <span className="text-xs sm:text-sm">{languages.find((lang) => lang.code === language)?.label}</span>
-            <FaChevronDown className={`text-xs transition-transform duration-300 ${isOpen ? 'transform rotate-180' : ''}`} />
+            <Flag
+              code={language === "en-IN" ? "IN" : language}
+              className="w-4 h-4 sm:w-6 sm:h-6"
+            />
+            <span className="text-xs sm:text-sm">
+              {languages.find((lang) => lang.code === language)?.label}
+            </span>
+            <FaChevronDown
+              className={`text-xs transition-transform duration-300 ${
+                isOpen ? "transform rotate-180" : ""
+              }`}
+            />
           </button>
 
           {isOpen && (
@@ -359,7 +442,10 @@ const Navbar = () => {
                     onClick={() => handleLanguageChange(lang.code)}
                     className="flex items-center space-x-2 px-3 py-2 text-xs sm:text-sm cursor-pointer hover:bg-blue-100 transition-colors duration-200"
                   >
-                    <Flag code={lang.code === 'en-IN' ? 'IN' : lang.code} className="w-4 h-4 sm:w-6 sm:h-6" />
+                    <Flag
+                      code={lang.code === "en-IN" ? "IN" : lang.code}
+                      className="w-4 h-4 sm:w-6 sm:h-6"
+                    />
                     <span>{lang.label}</span>
                   </li>
                 ))}
@@ -367,6 +453,8 @@ const Navbar = () => {
             </div>
           )}
         </div>
+
+        {isMobileView && renderAuthButton()}
       </div>
 
       {/* Navbar Main Content */}
@@ -375,10 +463,14 @@ const Navbar = () => {
         <div className="flex items-center space-x-2 xl:space-x-4 ">
           <div className="logo-container transform hover:scale-105 transition-transform duration-300">
             <Link to="/">
-              <img src={logo} alt="Logo" className="w-[180px] h-[50px] sm:w-[180px] sm:h-[50px]" />
+              <img
+                src={logo}
+                alt="Logo"
+                className="w-[180px] h-[50px] sm:w-[180px] sm:h-[50px]"
+              />
             </Link>
           </div>
-          
+
           {/* Enhanced Category Dropdown - Hidden on mobile and 1080px screens */}
           {!isMobileView && (
             <div className="relative" ref={dropdownRef}>
@@ -388,8 +480,14 @@ const Navbar = () => {
                 aria-expanded={isDropdownOpen}
               >
                 <FaThLarge className="text-[#0a63b0] text-lg" />
-                <span className="font-semibold text-lg whitespace-nowrap">Categories</span>
-                <FaChevronDown className={`text-sm transition-transform duration-300 ${isDropdownOpen ? 'transform rotate-180' : ''}`} />
+                <span className="font-semibold text-lg whitespace-nowrap">
+                  Categories
+                </span>
+                <FaChevronDown
+                  className={`text-sm transition-transform duration-300 ${
+                    isDropdownOpen ? "transform rotate-180" : ""
+                  }`}
+                />
               </button>
 
               {isDropdownOpen && (
@@ -403,13 +501,17 @@ const Navbar = () => {
                             key={key}
                             className={`flex items-center py-2 sm:py-3 px-2 sm:px-3 cursor-pointer rounded-md transition-all duration-200 ${
                               activeCategory === key
-                                ? 'bg-blue-100 text-[#0a63b0] font-medium shadow-inner'
-                                : 'hover:bg-gray-100 hover:text-gray-800'
+                                ? "bg-blue-100 text-[#0a63b0] font-medium shadow-inner"
+                                : "hover:bg-gray-100 hover:text-gray-800"
                             }`}
                             onMouseEnter={() => handleCategoryHover(key)}
                           >
-                            <span className="text-lg mr-2">{category.icon}</span>
-                            <span className="text-sm whitespace-nowrap truncate">{category.title}</span>
+                            <span className="text-lg mr-2">
+                              {category.icon}
+                            </span>
+                            <span className="text-sm whitespace-nowrap truncate">
+                              {category.title}
+                            </span>
                           </div>
                         ))}
                         {/* More Categories Link */}
@@ -419,11 +521,25 @@ const Navbar = () => {
                           onClick={() => setIsDropdownOpen(false)}
                         >
                           <span className="text-lg mr-2">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M9 18l6-6-6-6" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            <svg
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M9 18l6-6-6-6"
+                                stroke="black"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              />
                             </svg>
                           </span>
-                          <span className="whitespace-nowrap text-black">View more</span>
+                          <span className="whitespace-nowrap text-black">
+                            View more
+                          </span>
                         </Link>
                       </div>
                     </div>
@@ -432,33 +548,44 @@ const Navbar = () => {
                     <div className="w-2/3 p-2 sm:p-4 overflow-y-auto min-w-[280px] sm:min-w-[390px] md:min-w-[490px]">
                       <div className="space-y-2 sm:space-y-4 animate-fadeIn">
                         <h3 className="text-lg font-semibold text-gray-800 flex items-center truncate">
-                          <span className="mr-2">{categories[activeCategory].icon}</span>
+                          <span className="mr-2">
+                            {categories[activeCategory].icon}
+                          </span>
                           {categories[activeCategory].title}
                         </h3>
-                        
+
                         {categories[activeCategory].sections ? (
                           categories[activeCategory].sections.map((section) => (
-                            <div 
-                              key={section.title} 
-                              className={`space-y-2 sm:space-y-3 p-2 sm:p-3 rounded-lg ${section.color} ${
-                                section.isScrollingFrame ? 'h-[200px] overflow-y-auto' : ''
+                            <div
+                              key={section.title}
+                              className={`space-y-2 sm:space-y-3 p-2 sm:p-3 rounded-lg ${
+                                section.color
+                              } ${
+                                section.isScrollingFrame
+                                  ? "h-[140px] overflow-y-auto"
+                                  : ""
                               }`}
-                              ref={section.isScrollingFrame ? scrollContainerRef : null}
                             >
                               <h4 className="text-sm font-medium text-gray-600 border-b pb-1">
                                 {section.title}
                               </h4>
                               <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-2">
-                                {section.items.map((item) => (
-                                  item === 'view more →' ? (
-                                    <div 
+                                {section.items.map((item) =>
+                                  item === "view more →" ? (
+                                    <div
                                       key={item}
                                       className="flex items-center group cursor-pointer"
-                                      onClick={() => handleViewMoreClick(activeCategory)}
+                                      onClick={() =>
+                                        handleViewMoreClick(activeCategory)
+                                      }
                                     >
                                       <div className="w-full transform transition-all duration-300 hover:translate-x-1">
                                         <div className="flex items-center px-2 sm:px-3 py-1 sm:py-2 rounded-lg bg-opacity-0 group-hover:bg-white group-hover:bg-opacity-70 transition-colors duration-200">
-                                          {techIcons[item] && <span className="mr-1 sm:mr-2">{techIcons[item]}</span>}
+                                          {techIcons[item] && (
+                                            <span className="mr-1 sm:mr-2">
+                                              {techIcons[item]}
+                                            </span>
+                                          )}
                                           <span className="text-sm text-gray-700 group-hover:text-blue-600 transition-colors duration-200 truncate">
                                             {item}
                                           </span>
@@ -474,7 +601,9 @@ const Navbar = () => {
                                       <div className="w-full transform transition-all duration-300 hover:translate-x-1">
                                         <div className="flex items-center px-2 sm:px-3 py-1 sm:py-2 rounded-lg bg-opacity-0 group-hover:bg-white group-hover:bg-opacity-70 transition-colors duration-200">
                                           {techIcons[item] ? (
-                                            <span className="mr-1 sm:mr-2">{techIcons[item]}</span>
+                                            <span className="mr-1 sm:mr-2">
+                                              {techIcons[item]}
+                                            </span>
                                           ) : (
                                             <FaAngleRight className="text-blue-500 text-xs mr-1 sm:mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
                                           )}
@@ -485,18 +614,20 @@ const Navbar = () => {
                                       </div>
                                     </a>
                                   )
-                                ))}
+                                )}
                               </div>
                             </div>
                           ))
                         ) : (
                           <div className="space-y-2 sm:space-y-3">
-                            {categories[activeCategory].items.map((item) => (
-                              item === 'view more →' ? (
-                                <div 
+                            {categories[activeCategory].items.map((item) =>
+                              item === "view more →" ? (
+                                <div
                                   key={item}
                                   className="flex items-center group cursor-pointer"
-                                  onClick={() => handleViewMoreClick(activeCategory)}
+                                  onClick={() =>
+                                    handleViewMoreClick(activeCategory)
+                                  }
                                 >
                                   <div className="w-full transform transition-all duration-300 hover:translate-x-1">
                                     <div className="flex items-center px-2 sm:px-3 py-1 sm:py-2 rounded-lg bg-opacity-0 group-hover:bg-blue-50 transition-colors duration-200">
@@ -519,47 +650,40 @@ const Navbar = () => {
                                       <span className="text-sm text-gray-700 group-hover:text-blue-600 transition-colors duration-200 truncate">
                                         {item}
                                       </span>
-                                      {activeCategory === 'bank' && item === 'Coming Soon' && (
-                                        <span className="ml-1 sm:ml-2 px-1 sm:px-2 py-0.5 sm:py-1 text-xs bg-yellow-100 text-yellow-800 rounded-full animate-pulse whitespace-nowrap">
-                                          Soon
-                                        </span>
-                                      )}
+                                      {activeCategory === "bank" &&
+                                        item === "Coming Soon" && (
+                                          <span className="ml-1 sm:ml-2 px-1 sm:px-2 py-0.5 sm:py-1 text-xs bg-yellow-100 text-yellow-800 rounded-full animate-pulse whitespace-nowrap">
+                                            Soon
+                                          </span>
+                                        )}
                                     </div>
                                   </div>
                                 </a>
                               )
-                            ))}
+                            )}
                           </div>
                         )}
                       </div>
                     </div>
                   </div>
-                  
+
                   {/* Footer with fixed width */}
                   <div className="bg-gray-50 px-3 sm:px-4 py-1 sm:py-2 border-t text-center w-full">
                     <p className="text-xs text-gray-500 animate-bounce whitespace-nowrap">
-                      Browse all {categories[activeCategory].title.toLowerCase()} categories
+                      Browse all{" "}
+                      {categories[activeCategory].title.toLowerCase()}{" "}
+                      categories
                     </p>
                   </div>
                 </div>
               )}
             </div>
           )}
-
-          {/* Mobile Menu Button - Shown on mobile and 1080px screens */}
-          {isMobileView && (
-            <button 
-              className="text-gray-700 focus:outline-none"
-              onClick={toggleMobileMenu}
-            >
-              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          )}
         </div>
 
         {/* Mobile Search Button - Visible only on mobile and 1080px screens */}
         {isMobileView && (
-          <button 
+          <button
             className="text-gray-700 p-2 focus:outline-none"
             onClick={() => setIsFocused(!isFocused)}
           >
@@ -570,30 +694,29 @@ const Navbar = () => {
         {/* Desktop Navbar Links - Hidden on mobile and 1080px screens */}
         {!isMobileView && (
           <nav className="flex space-x-2 md:space-x-6 lg:space-x-6 xl:space-x-8">
-
-                    {/* Search Bar - Hidden on mobile and 1080px screens */}
-        {!isMobileView && (
-          <div className="flex items-center justify-center">
-            <div className="relative">
-              <div
-                className={`flex cursor-pointer items-center gap-2 border-l-4 border-r-4 border-[#0a63b0] rounded-full px-2 transition-all duration-300 ease-in-out ${
-                  isFocused ? "w-[190px] lg:w-[230px] xl:w-[400px] p-2 shadow-md " : "w-[170px] xl:w-[290px] p-2 shadow-md"
-                }`}
-              >
-                <Search
-                  className="text-blue-900 cursor-pointer flex hover:text-blue-700 transition-colors duration-200"
-                />
-                <input
-                  type="text"
-                  placeholder={"Search your favourite Mcqs..."}
-                  className="w-full cursor-pointer outline-none bg-transparent animate-fadeIn text-sm md:text-base"
-                  onFocus={() => setIsFocused(true)}
-                  onBlur={() => setIsFocused(false)}
-                />
+            {/* Search Bar - Hidden on mobile and 1080px screens */}
+            {!isMobileView && (
+              <div className="flex items-center justify-center">
+                <div className="relative">
+                  <div
+                    className={`flex cursor-pointer items-center gap-2 border-l-4 border-r-4 border-[#0a63b0] rounded-full px-2 transition-all duration-300 ease-in-out ${
+                      isFocused
+                        ? "w-[190px] lg:w-[230px] xl:w-[400px] p-2 shadow-md "
+                        : "w-[170px] xl:w-[290px] p-2 shadow-md"
+                    }`}
+                  >
+                    <Search className="text-blue-900 cursor-pointer flex hover:text-blue-700 transition-colors duration-200" />
+                    <input
+                      type="text"
+                      placeholder={"Search your favourite Mcqs..."}
+                      className="w-full cursor-pointer outline-none bg-transparent animate-fadeIn text-sm md:text-base"
+                      onFocus={() => setIsFocused(true)}
+                      onBlur={() => setIsFocused(false)}
+                    />
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        )}
+            )}
             {navLinks.map((link) => (
               <a
                 key={link.label}
@@ -632,102 +755,78 @@ const Navbar = () => {
           </div>
         </div>
       )}
-
-      {/* Mobile Menu - Appears when menu button is clicked on mobile or 1080px screens */}
-      {mobileMenuOpen && isMobileView && (
-        <div className="bg-white shadow-lg w-full" ref={mobileMenuRef}>
-          {/* Mobile Categories Dropdown */}
-          
-          <div className="border-t border-b border-gray-200 px-4 py-2 w-full">
+      {isOpenc && isMobileView && (
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          transition={{ duration: 0.2 }}
+          className="bg-white shadow-lg w-full"
+          ref={mobileMenuRef}
+        >
+          {/* Mobile Navigation Links */}
+          <div className="py-1 w-full">
             {Object.entries(categories).map(([key, category]) => (
-              <div key={key} className="mb-3 w-full">
-                <button
-                  className="w-full flex justify-between items-center py-3 text-left"
-                  onClick={() => toggleMobileCategory(key)}
+              <div
+                key={key}
+                to="/categories"
+                className="block px-4 py-3 text-gray-700 hover:bg-gray-100 flex items-center justify-between"
+                onClick={() => setIsOpenc(false)}
+              >
+                <div className="flex items-center">
+                  <span className="mr-3">{category.icon}</span>
+                  <span>{category.title}</span>
+                </div>
+                <svg
+                  className="w-4 h-4 text-gray-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
-                  <div className="flex items-center">
-                    <span className="mr-3 text-lg">{category.icon}</span>
-                    <span className="font-medium text-lg">{category.title}</span>
-                  </div>
-                  {mobileCategoryOpen === key ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
-                </button>
-
-                {mobileCategoryOpen === key && (
-                  <div className="pl-8 mt-2 space-y-3 w-full">
-                    {category.sections?.map((section, sectionIndex) => (
-                      <div key={sectionIndex} className="mb-4 w-full">
-                        <h4 className="font-medium text-gray-600 mb-2 text-lg">
-                          {section.title}
-                        </h4>
-                        <div className="grid grid-cols-2 gap-2 w-full">
-                          {section.items.map((item, itemIndex) => (
-                            item === 'view more →' ? (
-                              <div 
-                                key={itemIndex}
-                                className={`flex items-center px-3 py-2 rounded-md ${section.color} text-base cursor-pointer w-full`}
-                                onClick={() => handleViewMoreClick(key)}
-                              >
-                                {techIcons[item] && <span className="mr-2">{techIcons[item]}</span>}
-                                <span>{item}</span>
-                              </div>
-                            ) : (
-                              <a
-                                key={itemIndex}
-                                href="#"
-                                className={`flex items-center px-3 py-2 rounded-md ${section.color} text-base w-full`}
-                              >
-                                {techIcons[item] && <span className="mr-2">{techIcons[item]}</span>}
-                                <span>{item}</span>
-                              </a>
-                            )
-                          ))}
-                        </div>
-                      </div>
-                    ))}
-                    {!category.sections && (
-                      <div className="grid grid-cols-2 gap-2 w-full">
-                        {category.items.map((item, itemIndex) => (
-                          item === 'view more →' ? (
-                            <div 
-                              key={itemIndex}
-                              className="flex items-center px-3 py-2 bg-gray-50 rounded-md text-base cursor-pointer w-full"
-                              onClick={() => handleViewMoreClick(key)}
-                            >
-                              {techIcons[item] && <span className="mr-2">{techIcons[item]}</span>}
-                              <span>{item}</span>
-                            </div>
-                          ) : (
-                            <a
-                              key={itemIndex}
-                              href="#"
-                              className="flex items-center px-3 py-2 bg-gray-50 rounded-md text-base w-full"
-                            >
-                              {techIcons[item] && <span className="mr-2">{techIcons[item]}</span>}
-                              <span>{item}</span>
-                            </a>
-                          )
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                )}
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
               </div>
             ))}
-            {/* More Categories Link for Mobile */}
-            <Link
+            <div
               to="/categories"
-              className="flex items-center py-3 px-4 text-[#0a63b0] font-medium w-full"
-              onClick={() => setMobileMenuOpen(false)}
+              className="block px-4 py-3 text-blue-600 hover:bg-gray-100 flex items-center justify-between border-t border-gray-200"
+              onClick={() => setIsOpenc(false)}
             >
-              <span className="text-lg mr-2">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M9 18l6-6-6-6" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </span>
-              <span className="text-lg">View More</span>
-            </Link>
+              <span>View More</span>
+              <svg
+                className="w-4 h-4 text-blue-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </div>
           </div>
-
+        </motion.div>
+      )}
+      {/* Mobile Menu - Appears when menu button is clicked on mobile or 1080px screens */}
+      {mobileMenuOpen && isMobileView && (
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          transition={{ duration: 0.2 }}
+          className="bg-white shadow-lg w-full"
+          ref={mobileMenuRef}
+        >
           {/* Mobile Navigation Links */}
           <div className="px-4 py-3 w-full">
             {navLinks.map((link) => (
@@ -740,9 +839,17 @@ const Navbar = () => {
                 <span className="font-medium text-lg">{link.label}</span>
               </a>
             ))}
-            {renderMobileAuthButton()}
+            <div className="text-black text-xs sm:text-sm hover:text-blue-200 transition-colors duration-300 flex items-center">
+              <span className="text-gray-600 mr-3 text-lg">
+                <FaEnvelope className="mr-1 sm:mr-2" />
+              </span>
+              <span className="text-lg">mail: prep_point@gmail.com</span>
+            </div>
+            <div className="flex justify-center items-center">
+              <div className="bg-[#0a63b0] rounded-xl w-16 mt-6 h-1"></div>
+            </div>
           </div>
-        </div>
+        </motion.div>
       )}
     </header>
   );

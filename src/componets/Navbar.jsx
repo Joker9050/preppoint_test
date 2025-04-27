@@ -280,53 +280,53 @@ const Navbar = () => {
             {/* Dropdown Menu */}
             {isOpen_ && (
               <div
-              id="dropdownAvatar"
-              className="absolute right-0 z-20 mt-3 w-52 bg-white shadow-xl rounded-xl border border-gray-100 animate-fadeIn"
-            >
-              <ul className="py-2 text-sm text-gray-700">
-                <li>
-                  <a
-                    href="/dashboard"
-                    className="flex gap-2 px-4 py-2 hover:bg-gray-100 transition-all duration-200"
+                id="dropdownAvatar"
+                className="absolute right-0 z-20 mt-3 w-52 bg-white shadow-xl rounded-xl border border-gray-100 animate-fadeIn"
+              >
+                <ul className="py-2 text-sm text-gray-700">
+                  <li>
+                    <a
+                      href="/dashboard"
+                      className="flex gap-2 px-4 py-2 hover:bg-gray-100 transition-all duration-200"
+                    >
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                      </svg>
+                      Dashboard
+                    </a>
+                  </li>
+                  <li
+                    className="flex gap-2 px-4 py-2 text-[red] cursor-pointer hover:bg-gray-100 transition-all duration-200"
+                    onClick={handleLogout}
                   >
                     <svg
-                      width="20"
-                      height="20"
+                      className="w-5 h-5 rotate-180"
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="currentColor"
                       strokeWidth="1.5"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      xmlns="http://www.w3.org/2000/svg"
                     >
-                      <circle cx="12" cy="12" r="10"></circle>
-                      <polyline points="12 6 12 12 16 14"></polyline>
+                      <path d="M15.75 8.25L19.5 12L15.75 15.75" />
+                      <path d="M19.5 12H9.75" />
+                      <path d="M9.75 19.5H6C5.17 19.5 4.5 18.83 4.5 18V6C4.5 5.17 5.17 4.5 6 4.5H9.75" />
                     </svg>
-                    Dashboard
-                  </a>
-                </li>
-                <li
-                  className="flex gap-2 px-4 py-2 text-[red] cursor-pointer hover:bg-gray-100 transition-all duration-200"
-                  onClick={handleLogout}
-                >
-                  <svg
-                    className="w-5 h-5 rotate-180"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M15.75 8.25L19.5 12L15.75 15.75" />
-                    <path d="M19.5 12H9.75" />
-                    <path d="M9.75 19.5H6C5.17 19.5 4.5 18.83 4.5 18V6C4.5 5.17 5.17 4.5 6 4.5H9.75" />
-                  </svg>
-                  <span>Logout</span>
-                </li>
-              </ul>
-            </div>
+                    <span>Logout</span>
+                  </li>
+                </ul>
+              </div>
             )}
           </div>
         </div>

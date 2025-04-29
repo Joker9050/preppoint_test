@@ -37,7 +37,7 @@ const SearchBar = ({ isMobileView }) => {
             <div
               className={`flex cursor-pointer items-center gap-2 border-l-4 border-r-4 border-[#0a63b0] rounded-full px-2 transition-all duration-300 ease-in-out ${
                 isFocused
-                  ? "w-[190px] lg:w-[230px] xl:w-[400px] p-2 shadow-md"
+                  ? "w-[190px] lg:w-[230px] xl:w-[360px] p-2 shadow-md"
                   : "w-[170px] xl:w-[290px] p-2 shadow-md"
               }`}
             >

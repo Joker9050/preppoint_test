@@ -30,7 +30,7 @@ const PrepPointWelcome = () => {
       "Java",
       "JavaScript"
     ],
-    govt:[
+    government:[
       'SSC CGL', 'SSC CHSL', 'SSC GD', 'SSC MTS', 'SSC Stenographer'
     ]
   }
@@ -117,7 +117,7 @@ const PrepPointWelcome = () => {
             Welcome to PrepPoint
           </h1>
           <p className="text-gray-200 mb-6">
-            Your one-stop solution for MCOs and PYOs Practice
+            Your one-stop solution for MCQs and PYQs Practice
           </p>
 
           <motion.button
@@ -128,10 +128,9 @@ const PrepPointWelcome = () => {
             GET STARTED
           </motion.button>
         </motion.div>
-      </div> 
-       
-      <Slidebar name={"Learning IT"} courses={learning.it} portion = '/categories#IT'/>
-      <Slidebar name={"Learning Gov.t"}  courses={learning.govt} portion='/categories#GOVT' />
+      </div>       
+      <Slidebar name={"Learning IT"} courses={learning.it} portion = '/categories#it'/>
+      <Slidebar name={"Learning Gov.t"}  courses={learning.government} portion='/categories#government' />
       <section>
         <FeaturesSection/>
       </section>

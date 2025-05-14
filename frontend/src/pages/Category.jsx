@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import Navbar from "../componets/Navbar";
 import Footer from "../componets/Footer";
 import { motion } from "framer-motion";
@@ -123,13 +124,32 @@ const itemVariants = {
 };
 
 function Category() {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      const element = document.getElementById(location.hash.substring(1));
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth' });
+          
+          // Add temporary highlight class
+          element.classList.add('highlight-section');
+          setTimeout(() => {
+            element.classList.remove('highlight-section');
+          }, 2000);
+        }, 100);
+      }
+    }
+  }, [location]);
+
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
       <Navbar />
       <main className="flex-grow">
         {/* Hero Section */}
-        <section className="bg-gradient-to-r from-[#0a63b0] to-purple-600 text-white py-16">
-          <div className="container mx-auto px-4 text-center">
+        <section className="bg-gradient-to-t from-blue-100 via-blue-400 to-blue-500 text-white py-16">
+          <div className="container mx-auto px-3 text-center">
             <motion.h1 
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -142,18 +162,18 @@ function Category() {
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-xl md:text-2xl max-w-3xl mx-auto"
+              className="text-xl md:text-2xl max-w-3xl mx-auto text-gray-200"
             >
               Discover our comprehensive collection of courses and resources
             </motion.p>
+        <div id="it"></div>
+
           </div>
         </section>
-
         {/* Categories Section */}
         <div className="container mx-auto px-4 py-12">
           {/* Information Technology Section */}
           <motion.section 
-          id ='IT'
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
@@ -204,18 +224,18 @@ function Category() {
                 </motion.div>
               ))}
             </motion.div>
+            <div id="government"></div>
           </motion.section>
           
           {/* Government Exams Section */}
           <motion.section 
-          id ='GOVT'
-            initial="hidden"
+            initial="hidden"  
             whileInView="visible"
             viewport={{ once: true }}
             variants={containerVariants}
             className={`mb-16 p-8 rounded-2xl shadow-lg ${categories.government.bgColor}`}
           >
-            <div  className="flex items-center mb-8">
+            <div className="flex items-center mb-8">
               <div className="text-5xl mr-4">{categories.government.mainIcon}</div>
               <div>
                 <motion.h2 variants={itemVariants} className="text-3xl font-bold text-gray-800">
@@ -263,6 +283,7 @@ function Category() {
 
           {/* Banking Exams Section */}
           <motion.section 
+            id="bank"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}

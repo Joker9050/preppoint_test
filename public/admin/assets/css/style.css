@@ -1,0 +1,7 @@
+/* Custom styles for dashboard and admin sections */
+
+.text-yellow-600, .text-red-600 {
+  cursor: pointer;
+}
+
+/* Additional custom styles can be added here */

@@ -22,7 +22,7 @@ try {
     foreach ($categories as $category) {
         $catKey = $category['name'];
         $response[$catKey] = [
-            'category_title' => ucwords(str_replace('_', ' ', $category['name'])),
+            'title' => ucwords(str_replace('_', ' ', $category['name'])),
         ];
 
         // 2. Fetch subcategories
@@ -35,8 +35,8 @@ try {
         if (empty($subcategories)) {
             // No subcategories → "Coming Soon"
             $subcategory[] = [
-                'subcategory_title' => 'Coming Soon',
-                'subjects' => ['Coming Soon'],
+                'title' => 'Coming Soon',
+                'sections' => ['Coming Soon'],
                 'isScrollingFrame' => false
             ];
         } else {
@@ -44,7 +44,7 @@ try {
                 $isScrollable  = true; // Default to true for scrolling frame
 
                 // Fetch subjects under each subcategory
-                $stmtSubjects = $pdo->prepare("SELECT name FROM subjects WHERE subcategory_id = ? ORDER BY priority ASC, name ASC");
+                $stmtSubjects = $pdo->prepare("SELECT name FROM subjects WHERE subcategory_id = ? ORDER BY priority ASC, name ASC LIMIT 8");
                 $stmtSubjects->execute([$sub['id']]);
                 $subjects = $stmtSubjects->fetchAll(PDO::FETCH_COLUMN);
                 
@@ -56,14 +56,14 @@ try {
                 }
 
                 $subcategory[] = [
-                    'subcategory_title' => $sub['name'],
-                    'subjects' => $subjects,
+                    'title' => $sub['name'],
+                    'items' => $subjects,
                     'isScrollingFrame' => $isScrollable // Set to false if no subjects found 
                 ];
             }
         }
 
-        $response[$catKey]['subcategory'] = $subcategory;
+        $response[$catKey]['sections'] = $subcategory;
     }
 
     echo json_encode($response, JSON_PRETTY_PRINT);

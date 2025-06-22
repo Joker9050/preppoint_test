@@ -5,8 +5,8 @@ import { FaBook, FaGraduationCap, FaCertificate } from "react-icons/fa";
 const NavLinks = () => {
   const navLinks = [
     { id: 1, icon: <FaBook />, label: "Library", href: "/library" },
-    { id: 2, icon: <FaGraduationCap />, label: "Courses", href: "/courses" },
-    { id: 3, icon: <FaCertificate />, label: "Certifications", href: "/certifications" },
+    { id: 2, icon: <FaGraduationCap />, label: "Courses", href: "/" },
+    { id: 3, icon: <FaCertificate />, label: "PrepContributor", href: "/" },
   ];
 
   return (

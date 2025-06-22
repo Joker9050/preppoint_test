@@ -4,18 +4,17 @@
 header('Content-Type: application/json');
 
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    http_response_code(405); // Method Not Allowed
-    echo json_encode(['error' => 'Only POST requests are allowed']);
-    exit;
-}
+// if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+//     http_response_code(405); // Method Not Allowed
+//     echo json_encode(['error' => 'Only POST requests are allowed']);
+//     exit;
+// }
 
 require_once '../includes/base_api.php'; 
 
 
 // Read raw POST input and decode
 $input = json_decode(file_get_contents('php://input'), true);
-
 // Validate input
 if (!isset($input['category']) || !is_string($input['category'])) {
     http_response_code(400);
@@ -27,6 +26,12 @@ $categoryName = $input['category'];
 $response = [];
 
 try {
+
+    if($categoryName == 'it'){
+        $categoryName = 'Information Technology';
+    }elseif($categoryName == 'Government'){
+        $categoryName = 'Government Exams';
+    }
     // 1. Get category ID
     $stmt = $pdo->prepare("SELECT id , name FROM categories WHERE name = ?");
     $stmt->execute([$categoryName]);

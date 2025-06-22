@@ -3,7 +3,8 @@ import { useAuth } from './AuthContext';
 import { useNavigate } from 'react-router-dom';
 import logo from '../../assets/images/logo.png';
 import axios from 'axios';
-import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google'; // Added for Google Sign-In
+import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
+import { jwtDecode } from 'jwt-decode'; // Correct import for latest version
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -18,6 +19,7 @@ const Login = () => {
     password: false
   });
   const [loading, setLoading] = useState(false);
+  const [googleLoading, setGoogleLoading] = useState(false);
   const { login } = useAuth();
   const navigate = useNavigate();
 
@@ -92,7 +94,7 @@ const Login = () => {
       // const userData = response.data;
       const userData = '{success}';
       login(userData);
-      navigate('/');
+      navigate('/dashboard');
     } catch (err) {
       setErrors({
         ...errors,
@@ -106,31 +108,45 @@ const Login = () => {
     }
   };
 
-  // New Google Login Handler
   const handleGoogleSuccess = async (credentialResponse) => {
-    setLoading(true);
+    setGoogleLoading(true);
+    setErrors({ ...errors, form: '' });
+    
     try {
-      // Send the Google ID token to your backend for verification
+      const decoded = jwtDecode(credentialResponse.credential);
+      console.log('Google Login Success:', decoded);
+
+      if (!decoded.email || !decoded.email_verified) {
+        throw new Error('Google email not verified');
+      }
+
+      // Here you would typically send the token to your backend
       // const response = await axios.post(
-      //   'http://your-api-endpoint/auth/google', // Replace with your backend endpoint
+      //   'http://your-api-endpoint/auth/google',
       //   { idToken: credentialResponse.credential },
       //   { headers: { 'Content-Type': 'application/json' } }
       // );
 
       // const userData = response.data;
-      const userData = '{success}';
-      login(userData); // Assuming your login function expects user data
-      navigate('/');
+      const userData = {
+        email: decoded.email,
+        name: decoded.name,
+        picture: decoded.picture,
+        // Add any other user data your app needs
+      };
+      
+      login(userData);
+      navigate('/dashboard');
     } catch (err) {
+      console.error('Google login error:', err);
       setErrors({
         ...errors,
         form: err.message || 
              err.response?.data?.message || 
-             err.response?.data?.error || 
              'Google login failed. Please try again.'
       });
     } finally {
-      setLoading(false);
+      setGoogleLoading(false);
     }
   };
 
@@ -152,7 +168,7 @@ const Login = () => {
   ];
 
   return (
-    <GoogleOAuthProvider clientId="87569987972-osskffm06pf1gotuvg96b2fhg2fh7sfq.apps.googleusercontent.com"> {/* Replace with your Google Client ID */}
+    <GoogleOAuthProvider clientId="87569987972-osskffm06pf1gotuvg96b2fhg2fh7sfq.apps.googleusercontent.com">
       <div className="min-h-screen flex bg-gradient-to-br from-blue-50 to-indigo-50">
         {/* Attractive Sidebar */}
         <div className="hidden md:flex w-1/3 bg-gradient-to-b from-[#0a63b0] to-indigo-700 p-8 flex-col justify-center text-white">
@@ -214,7 +230,7 @@ const Login = () => {
                   </div>
                 )}
 
-                {/* Updated Google Login Button */}
+                {/* Google Login Button */}
                 <div className="mb-6">
                   <GoogleLogin
                     onSuccess={handleGoogleSuccess}
@@ -222,15 +238,29 @@ const Login = () => {
                     render={(renderProps) => (
                       <button
                         onClick={renderProps.onClick}
-                        disabled={renderProps.disabled || loading}
-                        className="w-full flex items-center justify-center py-3 px-4 border border-gray-200 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-all"
+                        disabled={renderProps.disabled || googleLoading}
+                        className={`w-full flex items-center justify-center py-3 px-4 border border-gray-200 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-all ${
+                          googleLoading ? 'opacity-80 cursor-not-allowed' : ''
+                        }`}
                       >
-                        <img 
-                          src="https://www.google.com/favicon.ico" 
-                          alt="Google logo" 
-                          className="h-5 w-5 mr-3"
-                        />
-                        Continue with Google
+                        {googleLoading ? (
+                          <>
+                            <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-gray-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                            Signing in with Google...
+                          </>
+                        ) : (
+                          <>
+                            <img 
+                              src="https://www.google.com/favicon.ico" 
+                              alt="Google logo" 
+                              className="h-5 w-5 mr-3"
+                            />
+                            Continue with Google
+                          </>
+                        )}
                       </button>
                     )}
                   />

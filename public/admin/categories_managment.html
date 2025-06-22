@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Manage Categories - PrepPoint</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+  <!-- Page Header -->
+  <div
+    class="bg-white shadow px-6 py-4 flex justify-between items-center"
+  >
+    <h2 class="text-2xl font-semibold">
+      Manage Categories & Subcategories
+    </h2>
+    <button
+      onclick="openCategoryModal()"
+      class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+    >
+      <i class="fas fa-plus mr-1"></i> Add Category
+    </button>
+  </div>
+
+  <!-- Category List -->
+  <div class="p-6 space-y-6">
+    <!-- Category Card -->
+    <div class="bg-white rounded shadow p-4">
+      <div class="flex justify-between items-center mb-2">
+        <h3 class="text-xl font-semibold text-blue-700">IT</h3>
+        <div>
+          <button
+            onclick="editCategory('IT')"
+            class="text-yellow-600 hover:text-yellow-800 mr-2"
+          >
+            <i class="fas fa-edit"></i>
+          </button>
+          <button
+            onclick="openDeleteConfirm('category', 'IT')"
+            class="text-red-600 hover:text-red-800"
+          >
+            <i class="fas fa-trash-alt"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Subcategory List -->
+      <div class="ml-4 space-y-2">
+        <div
+          class="flex justify-between items-center bg-gray-50 p-2 rounded"
+        >
+          <span>Programming</span>
+          <div>
+            <button
+              onclick="editSubcategory('Programming')"
+              class="text-yellow-600 hover:text-yellow-800 mr-2"
+            >
+              <i class="fas fa-edit"></i>
+            </button>
+            <button
+              onclick="openDeleteConfirm('subcategory', 'Programming')"
+              class="text-red-600 hover:text-red-800"
+            >
+              <i class="fas fa-trash-alt"></i>
+            </button>
+          </div>
+        </div>
+        <div
+          class="flex justify-between items-center bg-gray-50 p-2 rounded"
+        >
+          <span>Core Subjects</span>
+          <div>
+            <button
+              onclick="editSubcategory('Core Subjects')"
+              class="text-yellow-600 hover:text-yellow-800 mr-2"
+            >
+              <i class="fas fa-edit"></i>
+            </button>
+            <button
+              onclick="openDeleteConfirm('subcategory', 'Core Subjects')"
+              class="text-red-600 hover:text-red-800"
+            >
+              <i class="fas fa-trash-alt"></i>
+            </button>
+          </div>
+        </div>
+        <!-- Add Subcategory Button -->
+        <button
+          onclick="openSubcategoryModal('IT')"
+          class="mt-3 text-sm text-blue-600 hover:text-blue-800"
+        >
+          <i class="fas fa-plus-circle"></i> Add Subcategory
+        </button>
+      </div>
+    </div>
+
+    <!-- Repeat above for other categories like Government, Bank, etc. -->
+  </div>
+
+  <!-- CATEGORY Modal -->
+  <div
+    id="categoryModal"
+    class="hidden fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center"
+  >
+    <div class="bg-white rounded-lg p-6 w-[400px]">
+      <h3 class="text-xl font-semibold mb-4" id="categoryModalTitle">
+        Add Category
+      </h3>
+      <input
+        type="text"
+        id="categoryNameInput"
+        class="w-full border border-gray-300 p-2 rounded mb-4"
+        placeholder="Category Name"
+      />
+      <div class="text-right space-x-2">
+        <button
+          onclick="closeCategoryModal()"
+          class="px-4 py-2 bg-gray-300 rounded"
+        >
+          Cancel
+        </button>
+        <button
+          onclick="saveCategory()"
+          class="px-4 py-2 bg-blue-600 text-white rounded"
+        >
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUBCATEGORY Modal -->
+  <div
+    id="subcategoryModal"
+    class="hidden fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center"
+  >
+    <div class="bg-white rounded-lg p-6 w-[400px]">
+      <h3 class="text-xl font-semibold mb-4" id="subcategoryModalTitle">
+        Add Subcategory
+      </h3>
+      <input
+        type="text"
+        id="subcategoryNameInput"
+        class="w-full border border-gray-300 p-2 rounded mb-4"
+        placeholder="Subcategory Name"
+      />
+      <input type="hidden" id="subcategoryCategory" />
+      <div class="text-right space-x-2">
+        <button
+          onclick="closeSubcategoryModal()"
+          class="px-4 py-2 bg-gray-300 rounded"
+        >
+          Cancel
+        </button>
+        <button
+          onclick="saveSubcategory()"
+          class="px-4 py-2 bg-green-600 text-white rounded"
+        >
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Modal -->
+  <div
+    id="deleteConfirmModal"
+    class="hidden fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50"
+  >
+    <div class="bg-white rounded-lg p-6 w-[400px]">
+      <h3 class="text-xl font-semibold mb-4" id="deleteConfirmTitle">
+        Confirm Delete
+      </h3>
+      <p id="deleteConfirmMessage" class="mb-6"></p>
+      <div class="text-right space-x-2">
+        <button
+          onclick="closeDeleteConfirm()"
+          class="px-4 py-2 bg-gray-300 rounded"
+        >
+          Cancel
+        </button>
+        <button
+          onclick="confirmDelete()"
+          class="px-4 py-2 bg-red-600 text-white rounded"
+        >
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Alert Box -->
+  <div
+    id="alertBox"
+    class="hidden fixed top-4 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-30 z-50 flex items-center justify-center"
+  >
+    <div
+      class="bg-blue-600 text-white px-6 py-4 rounded shadow-lg flex items-center space-x-4"
+    >
+      <span id="alertMessage"></span>
+      <button
+        onclick="closeAlert()"
+        class="font-bold text-xl leading-none"
+      >
+        ×
+      </button>
+    </div>
+  </div>
+
+  <script>
+    let deleteType = null;
+    let deleteName = null;
+
+    // Alert Box Handling
+    function showAlert(message) {
+      const alertBox = document.getElementById("alertBox");
+      const alertMessage = document.getElementById("alertMessage");
+      alertMessage.textContent = message;
+      alertBox.classList.remove("hidden");
+      setTimeout(() => {
+        alertBox.classList.add("hidden");
+      }, 3000);
+    }
+    function closeAlert() {
+      document.getElementById("alertBox").classList.add("hidden");
+    }
+
+    // Category Modal Handling
+    function openCategoryModal() {
+      document.getElementById("categoryModal").classList.remove("hidden");
+      document.getElementById("categoryModalTitle").innerText = "Add Category";
+      document.getElementById("categoryNameInput").value = "";
+    }
+    function closeCategoryModal() {
+      document.getElementById("categoryModal").classList.add("hidden");
+    }
+    function saveCategory() {
+      const name = document.getElementById("categoryNameInput").value;
+      if (name) {
+        // TODO: AJAX call to save category
+        showAlert(`Category "${name}" saved.`);
+        closeCategoryModal();
+      }
+    }
+
+    // Subcategory Modal Handling
+    function openSubcategoryModal(category) {
+      document.getElementById("subcategoryModal").classList.remove("hidden");
+      document.getElementById("subcategoryModalTitle").innerText =
+        "Add Subcategory";
+      document.getElementById("subcategoryNameInput").value = "";
+      document.getElementById("subcategoryCategory").value = category;
+    }
+    function closeSubcategoryModal() {
+      document.getElementById("subcategoryModal").classList.add("hidden");
+    }
+    function saveSubcategory() {
+      const name = document.getElementById("subcategoryNameInput").value;
+      const category = document.getElementById("subcategoryCategory").value;
+      if (name && category) {
+        // TODO: AJAX call to save subcategory under given category
+        showAlert(`Subcategory "${name}" added to "${category}".`);
+        closeSubcategoryModal();
+      }
+    }
+
+    // Delete Confirmation Modal Handling
+    function openDeleteConfirm(type, name) {
+      deleteType = type;
+      deleteName = name;
+      document.getElementById("deleteConfirmTitle").innerText =
+        `Confirm Delete ${type.charAt(0).toUpperCase() + type.slice(1)}`;
+      document.getElementById("deleteConfirmMessage").innerText = `Are you sure you want to delete the ${type} "${name}"?`;
+      document.getElementById("deleteConfirmModal").classList.remove("hidden");
+    }
+    function closeDeleteConfirm() {
+      document.getElementById("deleteConfirmModal").classList.add("hidden");
+      deleteType = null;
+      deleteName = null;
+    }
+    function confirmDelete() {
+      // TODO: AJAX call to delete the category or subcategory
+      showAlert(`${deleteType.charAt(0).toUpperCase() + deleteType.slice(1)} "${deleteName}" deleted.`);
+      closeDeleteConfirm();
+    }
+
+    function editCategory(name) {
+      openCategoryModal();
+      document.getElementById("categoryModalTitle").innerText = "Edit Category";
+      document.getElementById("categoryNameInput").value = name;
+      // Store ID or name if needed for update
+    }
+
+    function editSubcategory(name) {
+      openSubcategoryModal("IT"); // For now, assuming from IT
+      document.getElementById("subcategoryModalTitle").innerText = "Edit Subcategory";
+      document.getElementById("subcategoryNameInput").value = name;
+    }
+  </script>
+</body>
+</html>

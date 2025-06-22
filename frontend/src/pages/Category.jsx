@@ -5,7 +5,7 @@ import Footer from "../componets/Footer";
 import { motion } from "framer-motion";
 
 const languageIcons = {
-  'HTML5': 'fab fa-html5 text-orange-500',
+  'HTML5gg': 'fab fa-html5 text-orange-500',
   'CSS': 'fab fa-css3-alt text-blue-500',
   'JavaScript': 'fab fa-js-square text-yellow-400',
   'React': 'fab fa-react text-blue-400',
@@ -30,16 +30,6 @@ const languageIcons = {
   'DBMS': 'fas fa-database text-blue-400',
   'OOP': 'fas fa-cubes text-red-500',
   'System Design': 'fas fa-sitemap text-indigo-500',
-  'SSC CGL': 'fas fa-file-alt text-blue-500',
-  'SSC CHSL': 'fas fa-file-alt text-blue-400',
-  'SSC GD': 'fas fa-file-alt text-blue-300',
-  'SSC MTS': 'fas fa-file-alt text-blue-200',
-  'SSC Stenographer': 'fas fa-file-alt text-blue-100',
-  'IBPS PO': 'fas fa-landmark text-green-500',
-  'IBPS Clerk': 'fas fa-landmark text-green-400',
-  'SBI PO': 'fas fa-university text-green-600',
-  'RBI Grade B': 'fas fa-money-bill-wave text-green-700',
-  'NABARD Grade A': 'fas fa-piggy-bank text-green-800'
 };
 
 const categories = {
@@ -212,10 +202,9 @@ function Category() {
                         whileHover={{ scale: 1.05 }}
                         className="bg-white border cursor-pointer border-gray-200 rounded-lg p-3 hover:shadow-md transition-all flex flex-col items-center"
                       >
-                        {languageIcons[item] && (
-                          <i className={`${languageIcons[item]} text-2xl mb-2`}></i>
-                        )}
-                        <div className={`text-sm font-medium text-center bg-gradient-to-r ${section.color} text-transparent bg-clip-text`}>
+
+                        <i className={`${languageIcons[item]} text-2xl mb-2`}></i>
+                        <div className={`text-sm font-medium text-center text-[#0a63b0] bg-clip-text`}>
                           {item}
                         </div>
                       </motion.div>
@@ -267,10 +256,10 @@ function Category() {
                         whileHover={{ scale: 1.05 }}
                         className="bg-white border cursor-pointer border-gray-200 rounded-lg p-3 hover:shadow-md transition-all flex flex-col items-center"
                       >
-                        {languageIcons[item] && (
-                          <i className={`${languageIcons[item]} text-2xl mb-2`}></i>
-                        )}
-                        <div className={`text-sm font-medium text-center bg-gradient-to-r ${section.color} text-transparent bg-clip-text`}>
+                        
+                          <i className='fas fa-file-alt text-blue-500 text-2xl mb-2'></i>
+                        
+                        <div className={`text-sm font-medium text-center text-[#0a63b0] bg-clip-text`}>
                           {item}
                         </div>
                       </motion.div>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PrepPoint MCQ Entry</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 py-10">
+  <div class="max-w-4xl mx-auto bg-white p-8 rounded shadow">
+    <h1 class="text-2xl font-bold mb-6">Add New MCQ</h1>
+    <form id="mcqForm" enctype="multipart/form-data" method="POST" action="save_question.php">
+      <!-- Question -->
+      <label class="block font-semibold">Question Number</label>
+      <input type="number" name="question_no" class="w-full border p-2 rounded mb-4" required>
+
+      <label class="block font-semibold">Question</label>
+      <textarea name="question" class="w-full border p-2 rounded mb-4" required></textarea>
+
+      <!-- Optional Question Code -->
+      <label class="block font-semibold">Code Snippet (Optional)</label>
+      <textarea name="question_code" class="w-full border p-2 rounded mb-4"></textarea>
+
+      <!-- Options -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Option A -->
+        <div>
+          <label class="block font-semibold">Option A (Text)</label>
+          <input name="options[A][text]" class="w-full border p-2 rounded mb-2">
+          <label>Code:</label>
+          <textarea name="options[A][code]" class="w-full border p-2 rounded mb-2"></textarea>
+          <label>Image:</label>
+          <input type="file" name="options[A][image]" class="mb-4">
+        </div>
+
+        <!-- Option B -->
+        <div>
+          <label class="block font-semibold">Option B (Text)</label>
+          <input name="options[B][text]" class="w-full border p-2 rounded mb-2">
+          <label>Code:</label>
+          <textarea name="options[B][code]" class="w-full border p-2 rounded mb-2"></textarea>
+          <label>Image:</label>
+          <input type="file" name="options[B][image]" class="mb-4">
+        </div>
+
+        <!-- Option C -->
+        <div>
+          <label class="block font-semibold">Option C (Text)</label>
+          <input name="options[C][text]" class="w-full border p-2 rounded mb-2">
+          <label>Code:</label>
+          <textarea name="options[C][code]" class="w-full border p-2 rounded mb-2"></textarea>
+          <label>Image:</label>
+          <input type="file" name="options[C][image]" class="mb-4">
+        </div>
+
+        <!-- Option D -->
+        <div>
+          <label class="block font-semibold">Option D (Text)</label>
+          <input name="options[D][text]" class="w-full border p-2 rounded mb-2">
+          <label>Code:</label>
+          <textarea name="options[D][code]" class="w-full border p-2 rounded mb-2"></textarea>
+          <label>Image:</label>
+          <input type="file" name="options[D][image]" class="mb-4">
+        </div>
+      </div>
+
+      <!-- Correct Option -->
+      <label class="block font-semibold">Correct Option</label>
+      <select name="correct_option" class="w-full border p-2 rounded mb-4" required>
+        <option value="A">A</option>
+        <option value="B">B</option>
+        <option value="C">C</option>
+        <option value="D">D</option>
+      </select>
+
+      <!-- Explanation -->
+      <label class="block font-semibold">Explanation</label>
+      <textarea name="explanation" class="w-full border p-2 rounded mb-4" required></textarea>
+
+      <!-- Metadata -->
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label>Difficulty</label>
+          <select name="difficulty" class="w-full border p-2 rounded mb-4">
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+          </select>
+        </div>
+        <div>
+          <label>Status</label>
+          <select name="status" class="w-full border p-2 rounded mb-4">
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4 mb-4">
+  <div>
+    <label class="block font-semibold">Topic ID</label>
+    <input type="number" name="topic_id" class="w-full border p-2 rounded" required>
+  </div>
+  <div>
+    <label class="block font-semibold">Subtopic ID</label>
+    <input type="number" name="subtopic_id" class="w-full border p-2 rounded" required>
+  </div>
+</div>
+
+      <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Save Question</button>
+</form>
+  </div>
+
+<!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+<script>
+document.getElementById('mcqForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  var form = e.target;
+  var formData = new FormData(form);
+
+  fetch(form.action, {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: data.message,
+        confirmButtonColor: '#3085d6'
+      });
+      form.reset();
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: data.message,
+        confirmButtonColor: '#d33'
+      });
+    }
+  })
+  .catch(error => {
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: error.message,
+      confirmButtonColor: '#d33'
+    });
+  });
+});
+</script>
+
+</body>
+</html>

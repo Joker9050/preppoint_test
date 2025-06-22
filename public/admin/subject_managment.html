@@ -1,0 +1,143 @@
+<!-- subject-management.php -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Subject Management | PrepPoint Admin</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- Main Content -->
+    <!-- subject-management.php -->
+
+<div class="p-6">
+
+  <!-- Page Header -->
+  <div class="mb-6 flex justify-between items-center">
+    <div>
+      <h2 class="text-2xl font-bold text-gray-800">Subject Management</h2>
+      <p class="text-sm text-gray-500">Add, filter, and manage all subjects across categories and subcategories.</p>
+    </div>
+  </div>
+
+  <!-- Filters -->
+  <div class="bg-white p-4 rounded shadow mb-6 flex flex-col lg:flex-row lg:items-center gap-4">
+    <div class="flex-1">
+      <label class="block text-sm font-medium text-gray-600 mb-1">Filter by Category</label>
+      <select class="w-full border border-gray-300 rounded px-3 py-2" name="filter_category" id="filter_category">
+        <option value="">-- All Categories --</option>
+        <option value="it">IT</option>
+        <option value="government">Government</option>
+        <option value="bank">Bank</option>
+        <option value="school">School</option>
+      </select>
+    </div>
+
+    <div class="flex-1">
+      <label class="block text-sm font-medium text-gray-600 mb-1">Filter by Subcategory</label>
+      <select class="w-full border border-gray-300 rounded px-3 py-2" name="filter_subcategory" id="filter_subcategory">
+        <option value="">-- All Subcategories --</option>
+        <option value="programming">Programming</option>
+        <option value="core-subjects">Core Subjects</option>
+        <option value="aptitude">Aptitude</option>
+        <option value="reasoning">Reasoning</option>
+        <option value="language">Language</option>
+      </select>
+    </div>
+
+    <div class="mt-2 lg:mt-6">
+      <button class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">
+        Filter
+      </button>
+    </div>
+  </div>
+
+  <!-- Add New Subject Form -->
+  <div class="bg-white p-6 rounded shadow mb-10 max-w-3xl">
+    <h3 class="text-lg font-semibold mb-4">Add New Subject</h3>
+    <form action="#" method="POST" class="space-y-4">
+
+      <div>
+        <label class="block font-medium mb-1">Select Category</label>
+        <select name="category" class="w-full border border-gray-300 rounded px-3 py-2" required>
+          <option value="">-- Select Category --</option>
+          <option value="it">IT</option>
+          <option value="government">Government</option>
+          <option value="bank">Bank</option>
+          <option value="school">School</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="block font-medium mb-1">Select Subcategory</label>
+        <select name="subcategory" class="w-full border border-gray-300 rounded px-3 py-2" required>
+          <option value="">-- Select Subcategory --</option>
+          <option value="programming">Programming</option>
+          <option value="core-subjects">Core Subjects</option>
+          <option value="aptitude">Aptitude</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="block font-medium mb-1">Subject Name</label>
+        <input type="text" name="subject" placeholder="e.g. Java, HTML, DBMS"
+          class="w-full border border-gray-300 rounded px-3 py-2" required />
+      </div>
+
+      <button type="submit"
+        class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">
+        Add Subject
+      </button>
+    </form>
+  </div>
+
+  <!-- Subject Table -->
+  <div class="bg-white p-6 rounded shadow">
+    <h3 class="text-lg font-semibold mb-4">Subjects List</h3>
+    <div class="overflow-x-auto">
+      <table class="min-w-full table-auto border border-gray-200">
+        <thead class="bg-gray-100 text-gray-700">
+          <tr>
+            <th class="px-4 py-2 border text-sm">#</th>
+            <th class="px-4 py-2 border text-sm">Category</th>
+            <th class="px-4 py-2 border text-sm">Subcategory</th>
+            <th class="px-4 py-2 border text-sm">Subject Name</th>
+            <th class="px-4 py-2 border text-sm">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Example rows (dynamically generated) -->
+          <tr class="hover:bg-gray-50">
+            <td class="px-4 py-2 border text-sm">1</td>
+            <td class="px-4 py-2 border text-sm">IT</td>
+            <td class="px-4 py-2 border text-sm">Programming</td>
+            <td class="px-4 py-2 border text-sm">Java</td>
+            <td class="px-4 py-2 border text-sm space-x-2">
+              <button class="bg-yellow-400 text-white px-2 py-1 rounded text-xs hover:bg-yellow-500">Edit</button>
+              <button class="bg-red-500 text-white px-2 py-1 rounded text-xs hover:bg-red-600">Delete</button>
+            </td>
+          </tr>
+          <tr class="hover:bg-gray-50">
+            <td class="px-4 py-2 border text-sm">2</td>
+            <td class="px-4 py-2 border text-sm">IT</td>
+            <td class="px-4 py-2 border text-sm">Core Subjects</td>
+            <td class="px-4 py-2 border text-sm">Operating Systems</td>
+            <td class="px-4 py-2 border text-sm space-x-2">
+              <button class="bg-yellow-400 text-white px-2 py-1 rounded text-xs hover:bg-yellow-500">Edit</button>
+              <button class="bg-red-500 text-white px-2 py-1 rounded text-xs hover:bg-red-600">Delete</button>
+            </td>
+          </tr>
+          <!-- Add more rows here -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+
+</body>
+</html>

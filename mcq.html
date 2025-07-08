@@ -2,324 +2,376 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title> MCQ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prepoint MCQ Practice</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --primary-color: #4361ee;
-      --correct-color: #2ecc71;
-      --incorrect-color: #e74c3c;
-      --code-bg: #282c34;
-      --text-color: #2d3748;
-      --light-gray: #f8f9fa;
-    }
-
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
 
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background-color: #f5f7fa;
-      padding: 2rem;
-      color: var(--text-color);
-      line-height: 1.6;
+      font-family: 'Inter', sans-serif;
+      background-color: #f0f2f5;
+      color: #2d3748;
     }
 
-    .mcq-container {
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-      max-width: 750px;
-      margin: 0 auto;
-      padding: 2.5rem;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .question-header {
-      display: flex;
-      align-items: center;
-      margin-bottom: 1.25rem;
-    }
-
-    .question-number {
-      background: var(--primary-color);
+    header {
+      background-color: #0a5eb0;
       color: white;
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      padding: 1rem 2rem;
+      text-align: center;
+      font-size: 1.8rem;
       font-weight: 600;
-      margin-right: 12px;
-      flex-shrink: 0;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: 250px 1fr 260px;
+      gap: 1.5rem;
+      padding: 2rem;
+    }
+
+    aside.left-panel, aside.right-panel, main {
+      background-color: #fff;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+
+    footer {
+      background-color: #0a5eb0;
+      color: white;
+      text-align: center;
+      padding: 0.75rem;
+      font-size: 0.95rem;
+    }
+
+    .tree-view ul {
+      list-style: none;
+      padding-left: 1rem;
+    }
+
+    .tree-view li {
+      margin: 0.4rem 0;
+      cursor: pointer;
+    }
+
+    .tree-view li span {
+      font-weight: 500;
+      color: #0a5eb0;
+    }
+
+    .tree-view li.complete > span {
+      color: green;
+    }
+
+    .tree-view li.complete > span::after {
+      content: " ✓";
+    }
+
+    .tree-view ul ul {
+      display: none;
+      margin-left: 1rem;
+    }
+
+    .tree-view li.active > ul {
+      display: block;
+    }
+
+    .question-box {
+      margin-bottom: 2.5rem;
     }
 
     .question-text {
+      font-weight: 600;
       font-size: 1.1rem;
-      font-weight: 500;
+      margin-bottom: 0.75rem;
+    }
+
+    .code-wrapper {
+      position: relative;
     }
 
     .code-container {
-      background: var(--code-bg);
-      color: #abb2bf;
-      padding: 1.25rem;
+      background: #1e1e1e;
+      color: #d4d4d4;
+      padding: 1rem;
       border-radius: 8px;
-      margin: 1.5rem 0;
-      overflow-x: auto;
-      font-family: 'Fira Code', 'Courier New', monospace;
-      font-size: 0.95rem;
-      line-height: 1.5;
-      tab-size: 4;
+      font-family: 'Fira Code', monospace;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
       white-space: pre-wrap;
+      overflow-x: auto;
     }
 
-    .options-grid {
-      margin: 2rem 0;
+    .copy-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: #0a5eb0;
+      color: #fff;
+      border: none;
+      padding: 0.3rem 0.6rem;
+      font-size: 0.75rem;
+      border-radius: 5px;
+      cursor: pointer;
     }
 
     .option {
-      padding: 1rem 1.25rem;
-      margin-bottom: 0.75rem;
-      border: 1px solid #e2e8f0;
+      padding: 0.85rem 1rem;
+      border: 1px solid #ccc;
       border-radius: 8px;
+      margin-bottom: 0.6rem;
       cursor: pointer;
       transition: all 0.2s ease;
-      display: flex;
-      align-items: center;
+      background-color: #fdfdfd;
     }
 
-    .option:hover:not(.selected) {
-      background-color: #f8fafc;
-      border-color: #cbd5e0;
+    .option:hover {
+      background-color: #eef7ff;
+      border-color: #0a5eb0;
     }
 
     .option.correct {
-      background-color: rgba(46, 204, 113, 0.1);
-      border-color: var(--correct-color);
+      background-color: #e6f9ec;
+      border-color: #28a745;
     }
 
     .option.incorrect {
-      background-color: rgba(231, 76, 60, 0.1);
-      border-color: var(--incorrect-color);
+      background-color: #fde8e8;
+      border-color: #dc3545;
     }
 
-    .option-letter {
-      font-weight: 700;
-      color: var(--primary-color);
-      min-width: 24px;
-      margin-right: 1rem;
+    .answer-section {
+      background-color: #f8f9fa;
+      padding: 1rem;
+      border-left: 4px solid #0a5eb0;
+      border-radius: 8px;
+      margin-top: 1rem;
+      display: none;
     }
 
-    .option.correct .option-letter,
-    .option.incorrect .option-letter {
-      color: white;
-      background: var(--primary-color);
-      border-radius: 50%;
-      width: 24px;
-      height: 24px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .answer-section.show {
+      display: block;
     }
 
     .show-answer-btn {
-      background: var(--primary-color);
+      background-color: #0a5eb0;
       color: white;
       border: none;
-      padding: 0.75rem 1.75rem;
+      padding: 0.6rem 1.2rem;
       border-radius: 8px;
       cursor: pointer;
-      font-size: 1rem;
-      font-weight: 500;
       margin-top: 0.5rem;
-      transition: all 0.2s ease;
-      display: inline-flex;
-      align-items: center;
-      box-shadow: 0 4px 6px rgba(66, 101, 238, 0.1);
+      font-weight: 500;
+      transition: background-color 0.3s ease;
     }
 
     .show-answer-btn:hover {
-      background: #3a56d4;
-      transform: translateY(-1px);
-      box-shadow: 0 6px 8px rgba(66, 101, 238, 0.15);
+      background-color: #084d91;
     }
 
-    .answer-container {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-      background: var(--light-gray);
-      border-radius: 8px;
-      margin-top: 1.5rem;
-    }
-
-    .answer-container.show {
-      max-height: 800px;
-      padding: 1.5rem;
-      border: 1px solid #e2e8f0;
-    }
-
-    .correct-answer {
-      font-weight: 600;
-      color: var(--correct-color);
-      margin-bottom: 0.75rem;
+    .nav-btns {
       display: flex;
-      align-items: center;
+      justify-content: space-between;
+      margin: 1.5rem 0;
     }
 
-    .correct-answer:before {
-      content: "✓";
-      margin-right: 8px;
-      font-size: 1.1em;
+    .nav-btns button {
+      background: #0a5eb0;
+      color: #fff;
+      padding: 0.6rem 1.2rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
     }
 
-    .explanation-title {
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-      color: var(--text-color);
-    }
-
-    .explanation-content {
-      color: #4a5568;
-    }
-
-    @media (max-width: 768px) {
-      body {
-        padding: 1rem;
-      }
-
-      .mcq-container {
-        padding: 1.5rem;
-      }
+    .nav-btns button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
     }
   </style>
 </head>
 <body>
-  <div class="mcq-container" id="mcqContainer">
-    <!-- Content will be loaded dynamically -->
+  <header>
+    Prepoint MCQ Practice
+  </header>
+
+  <div class="container">
+    <aside class="left-panel">
+      <h3>Progress</h3>
+      <div class="tree-view">
+        <ul>
+          <li id="topic-js"><span onclick="toggleTree(this)">JavaScript</span>
+            <ul>
+              <li><span onclick="scrollToQuestion(0)">Basics</span></li>
+              <li><span onclick="scrollToQuestion(1)">Console</span></li>
+            </ul>
+          </li>
+          <li><span onclick="toggleTree(this)">Python</span>
+            <ul>
+              <li><span>Coming Soon</span></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </aside>
+
+    <main id="mcq-area">
+      <div class="nav-btns">
+        <button id="prevBtn" onclick="goToQuestion(-1)">Previous</button>
+        <button id="nextBtn" onclick="goToQuestion(1)">Next</button>
+      </div>
+      <!-- Questions will be injected here -->
+      <div class="nav-btns">
+        <button id="prevBtnBottom" onclick="goToQuestion(-1)">Previous</button>
+        <button id="nextBtnBottom" onclick="goToQuestion(1)">Next</button>
+      </div>
+    </main>
+
+    <aside class="right-panel">
+      <h3>Sponsored</h3>
+      <p>Your Ad or Tip content goes here. You can add images, tips, or useful links.</p>
+    </aside>
   </div>
 
+  <footer>
+    &copy; 2025 Prepoint | All rights reserved
+  </footer>
+
   <script>
-    // Helper functions
-    function isCodeBlock(text) {
-      const codeIndicators = ['\n', '{', '}', ';', 'console.', 'function', 'let ', 'const ', '=>'];
-      return codeIndicators.some(ind => text.includes(ind));
-    }
-
-    function escapeHTML(str) {
-      return str.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-    }
-
-    // Sample JSON question with multiline code
-    const questionData = {
-      "id": 123,
-      "questionNumber": 1,
-      "questionText": "What does the following JavaScript function do?",
-      "codeSnippet": `function reverseString(str) {
-    let reversed = '';
-    for (let i = str.length - 1; i >= 0; i--) {
-        reversed += str[i];
-    }
-    return reversed;
-}`,
-      "options": {
-        "a": "Reverses a number",
-        "b": "Sorts characters alphabetically",
-        "c": "Reverses a string",
-        "d": "Converts string to uppercase"
+    const questions = [
+      {
+        questionText: "What is the output of console.log(typeof null)?",
+        codeSnippet: "",
+        options: {
+          a: "object",
+          b: "null",
+          c: "undefined",
+          d: "string"
+        },
+        correctAnswer: "a",
+        explanation: "typeof null is \"object\" due to a legacy bug in JavaScript."
       },
-      "correctAnswer": "c",
-      "explanation": `This function reverses the input string using a for loop.\n\nIt iterates from the end to the beginning, adding each character to a new string.\n\nExample:\nreverseString('hello') → 'olleh'`
-    };
+      {
+        questionText: "What will be the output of the following JavaScript code?",
+        codeSnippet: "console.log(2 + '2');\nconsole.log(typeof (2 + '2'));",
+        options: {
+          a: "22 and number",
+          b: "22 and string",
+          c: "4 and number",
+          d: "Error"
+        },
+        correctAnswer: "b",
+        explanation: "2 is coerced to string so '2' + '2' = '22'. typeof is 'string'."
+      }
+    ];
 
-    const mcqContainer = document.getElementById('mcqContainer');
-    let selectedOption = null;
+    const mcqArea = document.getElementById('mcq-area');
+    let currentQuestionIndex = 0;
+    let answered = new Array(questions.length).fill(false);
 
-    function renderMCQ(question) {
-      mcqContainer.innerHTML = `
-        <div class="question-header">
-          <div class="question-number">${question.questionNumber}</div>
-          <div class="question-text">${question.questionText}</div>
-        </div>
+    function renderQuestions(data) {
+      data.forEach((q, idx) => {
+        const box = document.createElement('div');
+        box.className = 'question-box';
+        box.setAttribute('id', `question-${idx}`);
 
-        ${question.codeSnippet ? `<div class="code-container">${escapeHTML(question.codeSnippet)}</div>` : ''}
-
-        <div class="options-grid" id="optionsGrid">
-          ${Object.entries(question.options).map(([key, value]) => `
-            <div class="option" data-option="${key}">
-              <span class="option-letter">${key.toUpperCase()}</span>
-              <span class="option-text">${isCodeBlock(value) ? `<pre class="code-container">${escapeHTML(value)}</pre>` : value}</span>
+        box.innerHTML = `
+          <div class="question-text">${idx + 1}. ${q.questionText}</div>
+          ${q.codeSnippet ? `
+            <div class="code-wrapper">
+              <pre class="code-container" id="code-${idx}">${q.codeSnippet}</pre>
+              <button class="copy-btn" onclick="copyCode(${idx})">Copy</button>
             </div>
+          ` : ''}
+          ${Object.entries(q.options).map(([key, val]) => `
+            <div class="option" data-answer="${key}" onclick="markAnswer(${idx}, '${key}', this)"><strong>${key.toUpperCase()}.</strong> ${val}</div>
           `).join('')}
-        </div>
-
-        <button class="show-answer-btn" id="showAnswerBtn">
-          See Answer & Explanation
-        </button>
-
-        <div class="answer-container" id="answerContainer">
-          <div class="correct-answer">Correct Answer: ${question.correctAnswer.toUpperCase()} (${question.options[question.correctAnswer]})</div>
-          <div class="explanation-title">Explanation:</div>
-          <div class="explanation-content">
-            ${
-              isCodeBlock(question.explanation)
-                ? `<pre class="code-container">${escapeHTML(question.explanation)}</pre>`
-                : question.explanation
-            }
+          <button class="show-answer-btn" onclick="toggleAnswer(${idx})">See Answer & Explanation</button>
+          <div class="answer-section" id="answer-${idx}">
+            <strong>Correct Answer:</strong> ${q.correctAnswer.toUpperCase()} - ${q.options[q.correctAnswer]}<br><br>
+            <strong>Explanation:</strong><br>${q.explanation}
           </div>
-        </div>
-      `;
+        `;
 
-      setupEventListeners(question);
+        mcqArea.insertBefore(box, mcqArea.children[1]);
+      });
+      updateNavButtons();
     }
 
-    function setupEventListeners(question) {
-      const options = document.querySelectorAll('.option');
-      const showAnswerBtn = document.getElementById('showAnswerBtn');
-      const answerContainer = document.getElementById('answerContainer');
+    function toggleTree(el) {
+      el.parentElement.classList.toggle('active');
+    }
 
-      options.forEach(option => {
-        option.addEventListener('click', function () {
-          if (selectedOption) {
-            selectedOption.classList.remove('selected');
+    function scrollToQuestion(index) {
+      currentQuestionIndex = index;
+      const el = document.getElementById(`question-${index}`);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      updateNavButtons();
+    }
+
+    function copyCode(index) {
+      const code = document.getElementById(`code-${index}`).innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        alert('Code copied to clipboard!');
+      });
+    }
+
+    function toggleAnswer(index) {
+      const el = document.getElementById(`answer-${index}`);
+      el.classList.toggle('show');
+    }
+
+    function markAnswer(index, selected, el) {
+      const correct = questions[index].correctAnswer;
+      const options = el.parentElement.querySelectorAll('.option');
+
+      options.forEach(o => {
+        o.classList.remove('correct', 'incorrect');
+      });
+
+      if (selected === correct) {
+        el.classList.add('correct');
+      } else {
+        el.classList.add('incorrect');
+        options.forEach(o => {
+          if (o.dataset.answer === correct) {
+            o.classList.add('correct');
           }
-          this.classList.add('selected');
-          selectedOption = this;
-
-          const selectedAnswer = this.dataset.option;
-          const isCorrect = selectedAnswer === question.correctAnswer;
-
-          options.forEach(opt => {
-            opt.classList.remove('correct', 'incorrect');
-            if (opt.dataset.option === question.correctAnswer) {
-              opt.classList.add('correct');
-            } else if (opt === this && !isCorrect) {
-              opt.classList.add('incorrect');
-            }
-          });
         });
-      });
+      }
 
-      showAnswerBtn.addEventListener('click', function () {
-        answerContainer.classList.toggle('show');
-        this.textContent = answerContainer.classList.contains('show')
-          ? 'Hide Answer'
-          : 'See Answer & Explanation';
-
-        if (answerContainer.classList.contains('show')) {
-          setTimeout(() => {
-            answerContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-          }, 350);
-        }
-      });
+      answered[index] = true;
+      checkTopicCompletion();
     }
 
-    renderMCQ(questionData);
+    function checkTopicCompletion() {
+      if (answered.every(val => val)) {
+        document.getElementById('topic-js').classList.add('complete');
+      }
+    }
+
+    function goToQuestion(delta) {
+      currentQuestionIndex += delta;
+      if (currentQuestionIndex < 0) currentQuestionIndex = 0;
+      if (currentQuestionIndex >= questions.length) currentQuestionIndex = questions.length - 1;
+      scrollToQuestion(currentQuestionIndex);
+    }
+
+    function updateNavButtons() {
+      document.getElementById('prevBtn').disabled = currentQuestionIndex === 0;
+      document.getElementById('nextBtn').disabled = currentQuestionIndex === questions.length - 1;
+      document.getElementById('prevBtnBottom').disabled = currentQuestionIndex === 0;
+      document.getElementById('nextBtnBottom').disabled = currentQuestionIndex === questions.length - 1;
+    }
+
+    renderQuestions(questions);
   </script>
 </body>
 </html>

@@ -121,25 +121,62 @@ const CategoryDropdown = ({ isMobileView }) => {
     return transformed;
   };
 
-  // Fetch categories from API
-  const fetchCategories = async () => {
-    setLoading(true);
-    setError(null);
-    try {
-      const response = await fetch(`${API_URL}category.php`, {
-      headers: {
-        'X-API-KEY': API_KEY
-      }
-      });
-      if (!response.ok) throw new Error('Failed to fetch categories');
-      const data = await response.json();
-      setCategories(transformApiData(data));
-    } catch (err) {
-      setError(err.message);
-      console.error("Category fetch error:", err);
-    } finally {
-      setLoading(false);
+  // Static categories data
+  const staticCategories = {
+    it: {
+      title: "Information Technology",
+      sections: [
+        {
+          title: "Programming Languages",
+          items: ["HTML", "CSS", "JavaScript", "React", "Python", "Java", "PHP", "C Programming", "TypeScript"],
+          color: "bg-gradient-to-r from-blue-50 via-purple-50 to-green-50",
+          isScrollingFrame: true
+        },
+        {
+          title: "Computer Science Fundamentals",
+          items: ["Data Structures & Algorithms", "DBMS", "Operating System", "Computer Networks", "OOPs Concepts", "Software Engineering", "Web & Internet Technologies", "Computer Organization & Architecture", "Theory of Computation", "Compiler Design"],
+          color: "bg-gradient-to-r from-purple-50 via-pink-50 to-red-50",
+          isScrollingFrame: true
+        }
+      ],
+      icon: "💻"
+    },
+    government: {
+      title: "Government Exams",
+      sections: [
+        {
+          title: "SSC Exams",
+          items: ["SSC CGL", "SSC CHSL", "SSC GD", "SSC MTS", "SSC Stenographer"],
+          color: "bg-gradient-to-r from-green-50 via-teal-50 to-cyan-50",
+          isScrollingFrame: false
+        },
+        {
+          title: "Other Government Exams",
+          items: ["view more →"],
+          color: "bg-gradient-to-r from-emerald-50 via-cyan-50 to-blue-50",
+          isScrollingFrame: false
+        }
+      ],
+      icon: "🏛️"
+    },
+    bank: {
+      title: "Banking Exams",
+      sections: [
+        {
+          title: "Banking Exams",
+          items: ["IBPS PO", "IBPS Clerk", "SBI PO", "SBI Clerk", "RBI Grade B", "NABARD Grade A", "SEBI Grade A"],
+          color: "bg-gradient-to-r from-yellow-50 via-orange-50 to-red-50",
+          isScrollingFrame: false
+        }
+      ],
+      icon: "🏦"
     }
+  };
+
+  // Load static data
+  const loadStaticCategories = () => {
+    setCategories(staticCategories);
+    setLoading(false);
   };
 
   // Handle click outside dropdown
@@ -154,11 +191,11 @@ const CategoryDropdown = ({ isMobileView }) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Fetch data when dropdown opens
+  // Load static data when dropdown opens
   useEffect(() => {
     if (isDropdownOpen && !hasFetched.current) {
       hasFetched.current = true;
-      fetchCategories();
+      loadStaticCategories();
     }
   }, [isDropdownOpen]);
 

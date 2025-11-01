@@ -20,11 +20,11 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    const fetchUserData = async () => {
+    const loadUserData = () => {
       try {
         setLoading(true);
-        
-        // Mock data
+
+        // Static mock data
         const mockUserData = {
           name: "Alex Johnson",
           avatar: "https://randomuser.me/api/portraits/men/32.jpg",
@@ -35,42 +35,42 @@ const Dashboard = () => {
             inProgress: 3
           },
           upcomingAssignments: [
-            { 
-              id: 1, 
-              course: "Mathematics", 
-              title: "Algebra Quiz", 
-              dueDate: "2023-06-15", 
-              status: "pending" 
+            {
+              id: 1,
+              course: "Mathematics",
+              title: "Algebra Quiz",
+              dueDate: "2023-06-15",
+              status: "pending"
             },
-            { 
-              id: 2, 
-              course: "History", 
-              title: "Ancient Civilizations Essay", 
-              dueDate: "2023-06-18", 
-              status: "pending" 
+            {
+              id: 2,
+              course: "History",
+              title: "Ancient Civilizations Essay",
+              dueDate: "2023-06-18",
+              status: "pending"
             }
           ],
           recentCourses: [
-            { 
-              id: 1, 
-              title: "Advanced Algebra", 
-              progress: 65, 
-              instructor: "Dr. Smith", 
-              lastAccessed: "2 days ago" 
+            {
+              id: 1,
+              title: "Advanced Algebra",
+              progress: 65,
+              instructor: "Dr. Smith",
+              lastAccessed: "2 days ago"
             },
-            { 
-              id: 2, 
-              title: "World History", 
-              progress: 42, 
-              instructor: "Prof. Johnson", 
-              lastAccessed: "1 day ago" 
+            {
+              id: 2,
+              title: "World History",
+              progress: 42,
+              instructor: "Prof. Johnson",
+              lastAccessed: "1 day ago"
             },
-            { 
-              id: 3, 
-              title: "Creative Writing", 
-              progress: 30, 
-              instructor: "Ms. Williams", 
-              lastAccessed: "3 days ago" 
+            {
+              id: 3,
+              title: "Creative Writing",
+              progress: 30,
+              instructor: "Ms. Williams",
+              lastAccessed: "3 days ago"
             }
           ],
           performanceStats: {
@@ -80,19 +80,20 @@ const Dashboard = () => {
           }
         };
 
-        // Simulate API delay
-        await new Promise(resolve => setTimeout(resolve, 800));
-        
-        setUserData(mockUserData);
+        // Simulate loading delay
+        setTimeout(() => {
+          setUserData(mockUserData);
+          setLoading(false);
+        }, 800);
+
       } catch (err) {
         setError("Failed to load dashboard data. Please try again later.");
-        console.error("Error fetching data:", err);
-      } finally {
+        console.error("Error loading data:", err);
         setLoading(false);
       }
     };
 
-    fetchUserData();
+    loadUserData();
   }, []);
 
   // Loading skeleton

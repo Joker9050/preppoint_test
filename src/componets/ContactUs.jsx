@@ -2,9 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const API_URL = import.meta.env.VITE_API_URL;
-const API_KEY = import.meta.env.VITE_API_KEY;
-
 const ContactModal = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({
     name: '',
@@ -110,13 +107,13 @@ const ContactModal = ({ isOpen, onClose }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     // Honeypot check
     if (formData.honeypot) {
       toast.error('Submission rejected');
       return;
     }
-    
+
     const validationErrors = validate();
     setErrors(validationErrors);
     if (Object.keys(validationErrors).length > 0) return;
@@ -124,51 +121,10 @@ const ContactModal = ({ isOpen, onClose }) => {
     setSubmitting(true);
     setFormErrors([]); // Clear previous errors
 
-    try {
-      const payload = new FormData();
-      payload.append('name', formData.name);
-      payload.append('email', formData.email);
-      payload.append('phone', formData.phone || ''); // Ensure phone is sent even if empty
-      payload.append('message', formData.message);
-      payload.append('interest', formData.interest || 'general'); // Default to 'general'
-      payload.append('consent', formData.consent ? '1' : '0'); // Convert to PHP-compatible boolean
-      
-      if (formData.file) {
-        payload.append('file', formData.file);
-      }
-
-      // Append honeypot value
-      payload.append('honeypot', formData.honeypot);
-
-      const response = await fetch(`${API_URL}contact_us.php`, {
-        method: 'POST',
-        headers: {
-          'X-API-KEY': API_KEY // <-- Add your API key here
-         },
-        body: payload
-      });
-
-      const responseData = await response.json();
-
-      if (!response.ok) {
-        // Handle backend validation errors
-        if (response.status === 400) {
-          if (responseData.errors && Array.isArray(responseData.errors)) {
-            setFormErrors(responseData.errors);
-          } else if (responseData.error) {
-            setFormErrors([responseData.error]);
-          }
-          return;
-        }
-        throw new Error(responseData.error || 'Failed to send message');
-      }
-
-      // Handle success with potential warning
-      if (responseData.warning) {
-        toast.warning(responseData.warning);
-      } else {
-        toast.success(responseData.message || "Thank you for your message! We'll get back to you soon.");
-      }
+    // Simulate API call delay
+    setTimeout(() => {
+      // Simulate successful submission
+      toast.success("Thank you for your message! We'll get back to you soon.");
 
       // Clear form and close modal after 3 seconds
       setFormData({
@@ -185,11 +141,8 @@ const ContactModal = ({ isOpen, onClose }) => {
       setTimeout(() => {
         onClose();
       }, 3000);
-    } catch (error) {
-      toast.error(error.message || 'An error occurred. Please try again.');
-    } finally {
       setSubmitting(false);
-    }
+    }, 1000); // 1 second delay to simulate processing
   };
 
   if (!isOpen) return null;

@@ -59,56 +59,70 @@ const itemVariants = {
   }
 };
 
-const API_URL = import.meta.env.VITE_API_URL;
-const API_KEY = import.meta.env.VITE_API_KEY;
-// API service function
-const fetchCategories = async () => {
-  try {
-    const response = await fetch(
-    `${API_URL}category_full.php`,
-       {
-        method: "GET",
-        headers: {
-          "X-API-KEY": API_KEY,
-          "Content-Type": "application/json"
-        }
+// Static categories data
+const staticCategories = {
+  it: {
+    title: "Information Technology",
+    description: "Master programming languages, algorithms, and computer science fundamentals",
+    mainIcon: "💻",
+    bgColor: "bg-gradient-to-br from-blue-50 to-indigo-100",
+    sections: [
+      {
+        title: "Programming Languages",
+        icon: "💻",
+        color: "from-blue-500 to-cyan-500",
+        items: ["HTML", "CSS", "JavaScript", "React", "Python", "Java", "PHP", "C Programming", "TypeScript"]
+      },
+      {
+        title: "Computer Science Fundamentals",
+        icon: "🧠",
+        color: "from-purple-500 to-pink-500",
+        items: ["Data Structures & Algorithms", "DBMS", "Operating System", "Computer Networks", "OOPs Concepts", "Software Engineering", "Web & Internet Technologies", "Computer Organization & Architecture", "Theory of Computation", "Compiler Design"]
       }
-    );
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-
-    return await response.json();
-  } catch (error) {
-    console.error("Failed to fetch categories:", error);
-    throw error;
+    ]
+  },
+  government: {
+    title: "Government Exams",
+    description: "Prepare for various government job examinations and competitive tests",
+    mainIcon: "🏛️",
+    bgColor: "bg-gradient-to-br from-green-50 to-emerald-100",
+    sections: [
+      {
+        title: "SSC Exams",
+        icon: "📋",
+        color: "from-green-500 to-teal-500",
+        items: ["SSC CGL", "SSC CHSL", "SSC GD", "SSC MTS", "SSC Stenographer"]
+      },
+      {
+        title: "Other Government Exams",
+        icon: "🏢",
+        color: "from-emerald-500 to-cyan-500",
+        items: []
+      }
+    ]
+  },
+  bank: {
+    title: "Banking Exams",
+    description: "Comprehensive preparation for banking sector competitive examinations",
+    mainIcon: "🏦",
+    bgColor: "bg-gradient-to-br from-yellow-50 to-orange-100",
+    sections: [
+      {
+        title: "Banking Exams",
+        icon: "💰",
+        color: "from-yellow-500 to-orange-500",
+        items: ["IBPS PO", "IBPS Clerk", "SBI PO", "SBI Clerk", "RBI Grade B", "NABARD Grade A", "SEBI Grade A"]
+      }
+    ]
   }
 };
 
 function Category() {
   const location = useLocation();
-  const [categories, setCategories] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const categories = staticCategories;
 
   useEffect(() => {
-    const loadCategories = async () => {
-      try {
-        const data = await fetchCategories();
-        setCategories(data);
-      } catch (err) {
-        setError(err.message || 'Failed to load categories');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadCategories();
-  }, []);
-
-  useEffect(() => {
-    if (location.hash && categories) {
+    if (location.hash) {
       const element = document.getElementById(location.hash.substring(1));
       if (element) {
         setTimeout(() => {
@@ -120,42 +134,7 @@ function Category() {
         }, 100);
       }
     }
-  }, [location, categories]);
-
-  if (loading) {
-    return (
-      <div className="min-h-screen flex flex-col bg-gray-50">
-        <Navbar />
-        <div className="flex-grow flex items-center justify-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
-        </div>
-        <Footer />
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="min-h-screen flex flex-col bg-gray-50">
-        <Navbar />
-        <div className="flex-grow flex items-center justify-center">
-          <div className="text-center p-6 bg-red-50 rounded-lg max-w-md">
-            <h3 className="text-xl font-medium text-red-800 mb-2">Error loading categories</h3>
-            <p className="text-red-700">{error}</p>
-            <button 
-              onClick={() => window.location.reload()}
-              className="mt-4 px-4 py-2 bg-red-100 text-red-700 rounded hover:bg-red-200 transition-colors"
-            >
-              Try Again
-            </button>
-          </div>
-        </div>
-        <Footer />
-      </div>
-    );
-  }
-
-  if (!categories) return null;
+  }, [location]);
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">

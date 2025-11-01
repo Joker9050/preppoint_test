@@ -179,36 +179,30 @@ const PrepPointWelcome = () => {
     "Search PYOs...",
   ];
   
-    const fetchLearningSection = async (category, setData, setLoading, setError) => {
-    setLoading(true);
-    setError(null);
-    try {
-      const response = await fetch(`${API_URL}learning_section.php`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-API-KEY': API_KEY
-        },
-        body: JSON.stringify({ category })
-      });
-      console.log("API Response:", response);
-      if (!response.ok) {
-        throw new Error(`Error: ${response.statusText}`);
-      }
-      const data = await response.json();
-      // console.log(data);
-      
-      setData(data[category === 'it' ? 'Information Technology' : 'Government Exams'] || []);
-    } catch (error) {
-      setError(error.message);
-    } finally {
-      setLoading(false);
-    }
+  // Static learning data
+  const staticLearningData = {
+    it: [
+      "Machine Learning",
+      "Computer Fundamentals",
+      "DBMS",
+      "Operating System",
+      "Computer Networks",
+      "PHP",
+      "CSS",
+      "C Programming",
+      "Java",
+      "JavaScript"
+    ],
+    government: [
+      'SSC CGL', 'SSC CHSL', 'SSC GD', 'SSC MTS', 'SSC Stenographer'
+    ]
   };
 
   useEffect(() => {
-    fetchLearningSection('it', setLearningIT, setLoadingIT, setErrorIT);
-    // fetchLearningSection('Government', setLearningGovernment, setLoadingGovernment, setErrorGovernment);
+    setLearningIT(staticLearningData.it);
+    setLoadingIT(false);
+    // setLearningGovernment(staticLearningData.government);
+    // setLoadingGovernment(false);
   }, []);
 
 

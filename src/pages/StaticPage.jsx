@@ -21,52 +21,28 @@ const StaticPage = () => {
   const API_KEY = import.meta.env.VITE_API_KEY || 'your_api_key_here';
 
   useEffect(() => {
-    const fetchPageContent = async () => {
+    const loadPageContent = () => {
       try {
         setLoading(true);
         setError(null);
-        
-        // Real API call to static_page.php
-        const response = await axios.get(`${API_URL}static_page_data.php`, {
-          params: { slug },
-          headers: {
-            'X-API-KEY': API_KEY
-          }
-        });
-        
-        if (response.data.error) {
-          throw new Error(response.data.error);
-        }
-        
-        setPageData(response.data);
 
-        // Generate table of contents from headings
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(response.data.content, 'text/html');
-        const headings = doc.querySelectorAll('h2, h3');
-        const toc = Array.from(headings).map(heading => ({
-          id: heading.id || heading.textContent.toLowerCase().replace(/\s+/g, '-'),
-          text: heading.textContent,
-          level: heading.tagName.toLowerCase()
-        }));
-        setTableOfContents(toc);
-        if (toc.length > 0) setActiveSection(toc[0].id);
-        
-      } catch (err) {
-        setError(err.message || 'Failed to load page content');
-        
-        // Fallback demo content if API fails
+        // Use static demo content
         const demoContent = getDemoContent(slug);
         if (demoContent) {
           setPageData(demoContent);
           generateTableOfContents(demoContent.content);
+        } else {
+          throw new Error('Page not found');
         }
+
+      } catch (err) {
+        setError(err.message || 'Failed to load page content');
       } finally {
         setLoading(false);
       }
     };
 
-    fetchPageContent();
+    loadPageContent();
   }, [slug]);
 
   const getDemoContent = (slug) => {

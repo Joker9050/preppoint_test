@@ -29,7 +29,9 @@ const Dashboard = () => {
           name: "Alex Johnson",
           avatar: "https://randomuser.me/api/portraits/men/32.jpg",
           points: 1250,
-          courses: {
+          streaks: 7,
+          rank: "Gold Scholar",
+          subjects: {
             enrolled: 5,
             completed: 2,
             inProgress: 3
@@ -37,39 +39,39 @@ const Dashboard = () => {
           upcomingAssignments: [
             {
               id: 1,
-              course: "Mathematics",
+              subject: "Mathematics",
               title: "Algebra Quiz",
               dueDate: "2023-06-15",
               status: "pending"
             },
             {
               id: 2,
-              course: "History",
+              subject: "History",
               title: "Ancient Civilizations Essay",
               dueDate: "2023-06-18",
               status: "pending"
             }
           ],
-          recentCourses: [
+          recentSubjects: [
             {
               id: 1,
               title: "Advanced Algebra",
               progress: 65,
-              instructor: "Dr. Smith",
+              attempts: 3,
               lastAccessed: "2 days ago"
             },
             {
               id: 2,
               title: "World History",
               progress: 42,
-              instructor: "Prof. Johnson",
+              attempts: 5,
               lastAccessed: "1 day ago"
             },
             {
               id: 3,
               title: "Creative Writing",
               progress: 30,
-              instructor: "Ms. Williams",
+              attempts: 2,
               lastAccessed: "3 days ago"
             }
           ],
@@ -192,12 +194,20 @@ const Dashboard = () => {
                 {/* User Info */}
                 <h2 className="text-xl font-bold text-white mb-1">{userData.name}</h2>
                 
-                {/* Points with Icon */}
-                <div className="inline-flex items-center bg-white/20 px-4 py-2 rounded-full">
-                  <svg className="w-5 h-5 text-yellow-300 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                  <span className="font-bold text-white">{userData.points.toLocaleString()} Points</span>
+                {/* Points and Rank with Icons */}
+                <div className="flex flex-col items-center space-y-2">
+                  <div className="inline-flex items-center bg-white/20 px-4 py-2 rounded-full">
+                    <svg className="w-5 h-5 text-yellow-300 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                    <span className="font-bold text-white">{userData.points.toLocaleString()} Points</span>
+                  </div>
+                  <div className="inline-flex items-center bg-white/20 px-3 py-1 rounded-full">
+                    <svg className="w-4 h-4 text-orange-300 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd" />
+                    </svg>
+                    <span className="text-sm font-semibold text-white">{userData.rank}</span>
+                  </div>
                 </div>
               </div>
               
@@ -205,11 +215,11 @@ const Dashboard = () => {
               <div className="bg-white/10 backdrop-blur-sm px-6 py-4">
                 <div className="grid grid-cols-3 gap-4 text-center">
                   <div>
-                    <div className="text-white font-bold text-lg">{userData.courses.enrolled}</div>
-                    <div className="text-blue-100 text-xs uppercase tracking-wider">Courses</div>
+                    <div className="text-white font-bold text-lg">{userData.subjects.enrolled}</div>
+                    <div className="text-blue-100 text-xs uppercase tracking-wider">Subjects</div>
                   </div>
                   <div>
-                    <div className="text-white font-bold text-lg">{userData.courses.completed}</div>
+                    <div className="text-white font-bold text-lg">{userData.subjects.completed}</div>
                     <div className="text-blue-100 text-xs uppercase tracking-wider">Completed</div>
                   </div>
                   <div>
@@ -237,13 +247,13 @@ const Dashboard = () => {
               <div className="space-y-4">
                 <div>
                   <div className="flex justify-between text-sm mb-1">
-                    <span className="text-gray-600">Course Completion</span>
-                    <span className="font-medium">{(userData.courses.completed / userData.courses.enrolled * 100).toFixed(0)}%</span>
+                    <span className="text-gray-600">Subject Completion</span>
+                    <span className="font-medium">{(userData.subjects.completed / userData.subjects.enrolled * 100).toFixed(0)}%</span>
                   </div>
                   <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div 
-                      className="bg-gradient-to-r from-blue-500 to-indigo-600 h-2 rounded-full" 
-                      style={{ width: `${(userData.courses.completed / userData.courses.enrolled) * 100}%` }}
+                    <div
+                      className="bg-gradient-to-r from-blue-500 to-indigo-600 h-2 rounded-full"
+                      style={{ width: `${(userData.subjects.completed / userData.subjects.enrolled) * 100}%` }}
                     ></div>
                   </div>
                 </div>
@@ -357,7 +367,7 @@ const Dashboard = () => {
                   onClick={() => setActiveTab('courses')}
                   className={`px-6 py-4 text-sm font-medium ${activeTab === 'courses' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-500 hover:text-gray-700'}`}
                 >
-                  My Courses
+                  My Subjects
                 </button>
                 <button
                   onClick={() => setActiveTab('assignments')}
@@ -387,12 +397,12 @@ const Dashboard = () => {
                   <p className="text-blue-100 mb-4">Here's what's happening with your learning today.</p>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div className="bg-white/20 backdrop-blur-sm p-4 rounded-lg">
-                      <h3 className="font-bold text-blue-50 mb-1">Courses in Progress</h3>
-                      <p className="text-3xl font-bold">{userData.courses.inProgress}</p>
+                      <h3 className="font-bold text-blue-50 mb-1">Subjects in Progress</h3>
+                      <p className="text-3xl font-bold">{userData.subjects.inProgress}</p>
                     </div>
                     <div className="bg-white/20 backdrop-blur-sm p-4 rounded-lg">
-                      <h3 className="font-bold text-blue-50 mb-1">Completed Courses</h3>
-                      <p className="text-3xl font-bold">{userData.courses.completed}</p>
+                      <h3 className="font-bold text-blue-50 mb-1">Completed Subjects</h3>
+                      <p className="text-3xl font-bold">{userData.subjects.completed}</p>
                     </div>
                     <div className="bg-white/20 backdrop-blur-sm p-4 rounded-lg">
                       <h3 className="font-bold text-blue-50 mb-1">Quiz Average</h3>
@@ -406,36 +416,36 @@ const Dashboard = () => {
                   <div className="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
                     <h2 className="text-lg font-bold flex items-center">
                       <FiBook className="mr-2 text-blue-600" />
-                      Recent Courses
+                      Recent Subjects
                     </h2>
                     <button className="text-blue-600 hover:text-blue-800 text-sm font-medium">
                       View All
                     </button>
                   </div>
                   <div className="divide-y divide-gray-200">
-                    {userData.recentCourses.map(course => (
-                      <motion.div 
-                        key={course.id}
+                    {userData.recentSubjects.map(subject => (
+                      <motion.div
+                        key={subject.id}
                         whileHover={{ scale: 1.01 }}
                         className="p-4 hover:bg-gray-50 cursor-pointer transition-colors"
                       >
                         <div className="flex justify-between items-center mb-2">
-                          <h3 className="font-medium text-gray-900">{course.title}</h3>
-                          <span className="text-sm text-gray-500">Last accessed: {course.lastAccessed}</span>
+                          <h3 className="font-medium text-gray-900">{subject.title}</h3>
+                          <span className="text-sm text-gray-500">Last accessed: {subject.lastAccessed}</span>
                         </div>
                         <div className="mb-1">
                           <div className="flex justify-between text-sm mb-1">
                             <span className="text-gray-600">Progress</span>
-                            <span className="font-medium">{course.progress}%</span>
+                            <span className="font-medium">{subject.progress}%</span>
                           </div>
                           <div className="w-full bg-gray-200 rounded-full h-2">
-                            <div 
-                              className="bg-gradient-to-r from-blue-500 to-indigo-600 h-2 rounded-full" 
-                              style={{ width: `${course.progress}%` }}
+                            <div
+                              className="bg-gradient-to-r from-blue-500 to-indigo-600 h-2 rounded-full"
+                              style={{ width: `${subject.progress}%` }}
                             ></div>
                           </div>
                         </div>
-                        <p className="text-sm text-gray-500">Instructor: {course.instructor}</p>
+                        <p className="text-sm text-gray-500">Attempts: {subject.attempts}</p>
                       </motion.div>
                     ))}
                   </div>
@@ -483,11 +493,11 @@ const Dashboard = () => {
                 transition={{ duration: 0.3 }}
                 className="bg-white rounded-lg shadow p-6"
               >
-                <h2 className="text-xl font-bold mb-6">My Courses</h2>
+                <h2 className="text-xl font-bold mb-6">My Subjects</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {userData.recentCourses.map(course => (
-                    <motion.div 
-                      key={course.id}
+                  {userData.recentSubjects.map(subject => (
+                    <motion.div
+                      key={subject.id}
                       whileHover={{ y: -5 }}
                       className="border rounded-lg overflow-hidden hover:shadow-lg transition-all"
                     >
@@ -495,22 +505,22 @@ const Dashboard = () => {
                         <FiBook className="h-16 w-16 text-white opacity-30" />
                       </div>
                       <div className="p-4">
-                        <h3 className="font-bold mb-1 text-gray-900">{course.title}</h3>
-                        <p className="text-sm text-gray-600 mb-3">Instructor: {course.instructor}</p>
+                        <h3 className="font-bold mb-1 text-gray-900">{subject.title}</h3>
+                        <p className="text-sm text-gray-600 mb-3">Attempts: {subject.attempts}</p>
                         <div className="mb-2">
                           <div className="flex justify-between text-xs mb-1">
                             <span className="text-gray-600">Progress</span>
-                            <span className="font-medium">{course.progress}%</span>
+                            <span className="font-medium">{subject.progress}%</span>
                           </div>
                           <div className="w-full bg-gray-200 rounded-full h-2">
-                            <div 
-                              className="bg-gradient-to-r from-blue-500 to-indigo-600 h-2 rounded-full" 
-                              style={{ width: `${course.progress}%` }}
+                            <div
+                              className="bg-gradient-to-r from-blue-500 to-indigo-600 h-2 rounded-full"
+                              style={{ width: `${subject.progress}%` }}
                             ></div>
                           </div>
                         </div>
                         <div className="flex justify-between items-center mt-4">
-                          <span className="text-sm text-gray-500">Last accessed: {course.lastAccessed}</span>
+                          <span className="text-sm text-gray-500">Last accessed: {subject.lastAccessed}</span>
                           <button className="text-blue-600 hover:text-blue-800 text-sm font-medium">
                             Continue
                           </button>

@@ -1,11 +1,9 @@
 import { useState } from 'react';
 import { useAuth } from './AuthContext';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from 'jwt-decode';
 import logo from '../../assets/images/logo.png';
-const API_URL = import.meta.env.VITE_API_URL;
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -88,72 +86,40 @@ const Register = () => {
 
     setLoading(true);
 
-    try {
-        const response = await axios.post(
-        `${API_URL}register.php`,
-          {
-            name: formData.name,
-            email: formData.email,
-            password: formData.password
-          },
-          {
-            headers: {
-              "X-API-KEY": import.meta.env.VITE_API_KEY,
-              "Content-Type": "application/json"
-            }
-          }
-        );
+    // Simulate API call delay
+    setTimeout(() => {
+      // Mock successful registration
+      const mockUser = {
+        id: Date.now(),
+        name: formData.name,
+        email: formData.email,
+        avatar: 'https://randomuser.me/api/portraits/men/32.jpg'
+      };
 
-      if (response.data.success) {
-        login(response.data.user);
-        navigate('/dashboard');
-      } else {
-        throw new Error(response.data.message || 'Registration failed');
-      }
-    } catch (err) {
-      setErrors({
-        ...errors,
-        form: err.response?.data?.message || 
-             err.message || 
-             'Registration failed. Please try again.'
-      });
-    } finally {
+      login(mockUser);
+      navigate('/dashboard');
       setLoading(false);
-    }
+    }, 1500);
   };
 
   const handleGoogleSuccess = async (credentialResponse) => {
     setGoogleLoading(true);
     setErrors({ ...errors, form: '' });
 
-    try {
-        const response = await axios.post(
-        `${API_URL}register.php`,
-          { idToken: credentialResponse.credential },
-          {
-            headers: {
-              "X-API-KEY": import.meta.env.VITE_API_KEY,
-              "Content-Type": "application/json"
-            } 
-          }
-        );
+    // Simulate Google registration delay
+    setTimeout(() => {
+      const decoded = jwtDecode(credentialResponse.credential);
+      const mockUser = {
+        id: decoded.sub,
+        name: decoded.name,
+        email: decoded.email,
+        avatar: decoded.picture
+      };
 
-      if (response.data.success) {
-        login(response.data.user);
-        navigate('/dashboard');
-      } else {
-        throw new Error(response.data.message || 'Google authentication failed');
-      }
-    } catch (err) {
-      setErrors({
-        ...errors,
-        form: err.response?.data?.message || 
-             err.message || 
-             'Google registration failed. Please try again.'
-      });
-    } finally {
+      login(mockUser);
+      navigate('/dashboard');
       setGoogleLoading(false);
-    }
+    }, 1500);
   };
 
   const handleGoogleError = () => {

@@ -8,6 +8,7 @@
 - [x] Delete `backup.txt` (if backend-related)
 
 ## Step 2: Modify Frontend Files to Remove Dynamic Elements
+- [x] Update `frontend_current/src/pages/Auth/Register.jsx`: Remove Axios imports, API calls, and replace with static UI or mock logic
 - [ ] Update `frontend_current/src/pages/Auth/ForgotPassword.jsx`: Remove Axios imports, API calls, and replace with static UI or mock logic
 - [ ] Update `frontend_current/src/pages/Auth/AuthContext.jsx`: Make auth static (no backend calls, use local state only)
 - [ ] Update `frontend_current/src/routes/AppRoutes.jsx`: Remove or comment out backend-dependent routes if needed

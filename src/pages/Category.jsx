@@ -201,7 +201,7 @@ function Category() {
                     </div>
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                       {section.items.map((item, i) => (
-                        <motion.div 
+                        <motion.div
                           key={`it-item-${i}`}
                           whileHover={{ scale: 1.05 }}
                           className="bg-white border cursor-pointer border-gray-200 rounded-lg p-3 hover:shadow-md transition-all flex flex-col items-center"
@@ -261,7 +261,7 @@ function Category() {
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                       {section.items.length > 0 ? (
                         section.items.map((item, i) => (
-                          <motion.div 
+                          <motion.div
                             key={`gov-item-${i}`}
                             whileHover={{ scale: 1.05 }}
                             className="bg-white border cursor-pointer border-gray-200 rounded-lg p-3 hover:shadow-md transition-all flex flex-col items-center"
@@ -322,7 +322,7 @@ function Category() {
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
                       {section.items.length > 0 ? (
                         section.items.map((item, i) => (
-                          <motion.div 
+                          <motion.div
                             key={`bank-item-${i}`}
                             whileHover={{ scale: 1.05 }}
                             className="bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-all flex flex-col items-center"

@@ -148,13 +148,13 @@ const CategoryDropdown = ({ isMobileView }) => {
           title: "SSC Exams",
           items: ["SSC CGL", "SSC CHSL", "SSC GD", "SSC MTS", "SSC Stenographer"],
           color: "bg-gradient-to-r from-green-50 via-teal-50 to-cyan-50",
-          isScrollingFrame: false
+          isScrollingFrame: true
         },
         {
           title: "Other Government Exams",
           items: ["view more →"],
           color: "bg-gradient-to-r from-emerald-50 via-cyan-50 to-blue-50",
-          isScrollingFrame: false
+          isScrollingFrame: true
         }
       ],
       icon: "🏛️"
@@ -166,7 +166,7 @@ const CategoryDropdown = ({ isMobileView }) => {
           title: "Banking Exams",
           items: ["IBPS PO", "IBPS Clerk", "SBI PO", "SBI Clerk", "RBI Grade B", "NABARD Grade A", "SEBI Grade A"],
           color: "bg-gradient-to-r from-yellow-50 via-orange-50 to-red-50",
-          isScrollingFrame: false
+          isScrollingFrame: true
         }
       ],
       icon: "🏦"

@@ -2,11 +2,8 @@ import { useState } from 'react';
 import { useAuth } from './AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
 import logo from '../../assets/images/logo.png';
-import axios from 'axios';
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from 'jwt-decode';
-const API_URL = import.meta.env.VITE_API_URL;
-const API_KEY = import.meta.env.VITE_API_KEY;
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -93,71 +90,40 @@ const Login = () => {
 
     setLoading(true);
 
-    try {
-        const response = await axios.post(
-         `${API_URL}register.php`,          
-          { 
-            email: formData.email,
-            password: formData.password
-          },
-          { 
-            headers: {
-              "X-API-KEY": API_KEY,
-              "Content-Type": "application/json"
-            }
-          }
-        );
+    // Simulate API call delay
+    setTimeout(() => {
+      // Mock successful login
+      const mockUser = {
+        id: 1,
+        name: 'Demo User',
+        email: formData.email,
+        avatar: 'https://randomuser.me/api/portraits/men/32.jpg'
+      };
 
-      if (!response.data.success) {
-        throw new Error(response.data.message || 'Login failed');
-      }
-
-      login(response.data.user);
+      login(mockUser);
       navigate('/dashboard');
-    } catch (err) {
-      setErrors({
-        ...errors,
-        form: err.response?.data?.message || 
-             err.message || 
-             'Login failed. Please try again.'
-      });
-    } finally {
       setLoading(false);
-    }
+    }, 1500);
   };
 
   const handleGoogleSuccess = async (credentialResponse) => {
     setGoogleLoading(true);
     setErrors({ ...errors, form: '' });
-    
-    try {
-        const response = await axios.post(
-          `${API_URL}register.php`,
-          { idToken: credentialResponse.credential },
-          { 
-            headers: {
-              "X-API-KEY": API_KEY,
-              "Content-Type": "application/json"
-            } 
-          }
-        );
 
-      if (!response.data.success) {
-        throw new Error(response.data.message || 'Google authentication failed');
-      }
+    // Simulate Google login delay
+    setTimeout(() => {
+      const decoded = jwtDecode(credentialResponse.credential);
+      const mockUser = {
+        id: decoded.sub,
+        name: decoded.name,
+        email: decoded.email,
+        avatar: decoded.picture
+      };
 
-      login(response.data.user);
+      login(mockUser);
       navigate('/dashboard');
-    } catch (err) {
-      setErrors({
-        ...errors,
-        form: err.response?.data?.message || 
-             err.message || 
-             'Google login failed. Please try again.'
-      });
-    } finally {
       setGoogleLoading(false);
-    }
+    }, 1500);
   };
 
   const handleGoogleError = () => {

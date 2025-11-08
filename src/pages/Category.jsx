@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Navbar from "../componets/Navbar";
 import Footer from "../componets/Footer";
 import { motion } from "framer-motion";
@@ -119,6 +119,7 @@ const staticCategories = {
 
 function Category() {
   const location = useLocation();
+  const navigate = useNavigate();
   const categories = staticCategories;
 
   useEffect(() => {
@@ -205,6 +206,7 @@ function Category() {
                           key={`it-item-${i}`}
                           whileHover={{ scale: 1.05 }}
                           className="bg-white border cursor-pointer border-gray-200 rounded-lg p-3 hover:shadow-md transition-all flex flex-col items-center"
+                          onClick={() => navigate('/mcq', { state: { subject: item } })}
                         >
                           {languageIcons[item] ? (
                             <i className={`${languageIcons[item]} text-2xl mb-2`}></i>
@@ -265,6 +267,7 @@ function Category() {
                             key={`gov-item-${i}`}
                             whileHover={{ scale: 1.05 }}
                             className="bg-white border cursor-pointer border-gray-200 rounded-lg p-3 hover:shadow-md transition-all flex flex-col items-center"
+                            onClick={() => navigate('/mcq', { state: { subject: item } })}
                           >
                             <i className='fas fa-file-alt text-blue-500 text-2xl mb-2'></i>
                             <div className="text-sm font-medium text-center text-[#0a63b0]">
@@ -326,6 +329,7 @@ function Category() {
                             key={`bank-item-${i}`}
                             whileHover={{ scale: 1.05 }}
                             className="bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-all flex flex-col items-center"
+                            onClick={() => navigate('/mcq', { state: { subject: item } })}
                           >
                             <i className="fas fa-book text-gray-400 text-2xl mb-2"></i>
                             <div className="text-sm font-medium text-center text-[#0a63b0]">

@@ -1,8 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa';
 import { MdEmail, MdPhone, MdLocationOn } from 'react-icons/md';
-import logo from '../assets/images/logo.png';
 
 const Footer = () => {
   return (
@@ -14,9 +14,9 @@ const Footer = () => {
           {/* Logo and About */}
           <div className="col-span-1 lg:col-span-2">
             <div className="flex items-center mb-4">
-              <img 
-                src={logo} 
-                alt="PrepPoint Logo" 
+              <img
+                src="/logo.png"
+                alt="PrepPoint Logo"
                 className="w-40 h-auto"
               />
             </div>

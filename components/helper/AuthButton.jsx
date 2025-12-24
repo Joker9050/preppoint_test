@@ -1,8 +1,6 @@
-// src/components/AuthButton.jsx
 import React, { useState, useRef } from "react";
-import { useAuth } from "../../pages/Auth/AuthContext";
-import { useNavigate } from "react-router-dom";
-import profile from "../../assets/images/profile.png";
+import { useAuth } from "../../lib/AuthContext";
+import { useRouter } from "next/router";
 
 const AuthButton = () => {
   const { user, logout } = useAuth();
@@ -30,7 +28,7 @@ const AuthButton = () => {
             <span className="sr-only">Open user menu</span>
             <img
               className="w-full h-full object-cover"
-              src={profile}
+              src="/profile.png"
               alt="User photo"
             />
           </button>

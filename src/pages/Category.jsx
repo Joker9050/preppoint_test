@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import Navbar from "../componets/Navbar";
+import { useRouter } from 'next/router';
 import Footer from "../componets/Footer";
 import { motion } from "framer-motion";
 
@@ -118,13 +117,13 @@ const staticCategories = {
 };
 
 function Category() {
-  const location = useLocation();
-  const navigate = useNavigate();
+  const router = useRouter();
   const categories = staticCategories;
 
   useEffect(() => {
-    if (location.hash) {
-      const element = document.getElementById(location.hash.substring(1));
+    if (router.asPath.includes('#')) {
+      const hash = router.asPath.split('#')[1];
+      const element = document.getElementById(hash);
       if (element) {
         setTimeout(() => {
           element.scrollIntoView({ behavior: 'smooth' });
@@ -135,11 +134,10 @@ function Category() {
         }, 100);
       }
     }
-  }, [location]);
+  }, [router.asPath]);
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
-      <Navbar />
       <main className="flex-grow">
         {/* Hero Section */}
         <section className="bg-gradient-to-t from-blue-100 via-blue-400 to-blue-500 text-white py-16">
@@ -206,7 +204,7 @@ function Category() {
                           key={`it-item-${i}`}
                           whileHover={{ scale: 1.05 }}
                           className="bg-white border cursor-pointer border-gray-200 rounded-lg p-3 hover:shadow-md transition-all flex flex-col items-center"
-                          onClick={() => navigate('/mcq', { state: { subject: item } })}
+                          onClick={() => router.push('/mcq?subject=' + encodeURIComponent(item))}
                         >
                           {languageIcons[item] ? (
                             <i className={`${languageIcons[item]} text-2xl mb-2`}></i>
@@ -267,7 +265,7 @@ function Category() {
                             key={`gov-item-${i}`}
                             whileHover={{ scale: 1.05 }}
                             className="bg-white border cursor-pointer border-gray-200 rounded-lg p-3 hover:shadow-md transition-all flex flex-col items-center"
-                            onClick={() => navigate('/mcq', { state: { subject: item } })}
+                            onClick={() => router.push('/mcq?subject=' + encodeURIComponent(item))}
                           >
                             <i className='fas fa-file-alt text-blue-500 text-2xl mb-2'></i>
                             <div className="text-sm font-medium text-center text-[#0a63b0]">
@@ -329,7 +327,7 @@ function Category() {
                             key={`bank-item-${i}`}
                             whileHover={{ scale: 1.05 }}
                             className="bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-all flex flex-col items-center"
-                            onClick={() => navigate('/mcq', { state: { subject: item } })}
+                            onClick={() => router.push('/mcq?subject=' + encodeURIComponent(item))}
                           >
                             <i className="fas fa-book text-gray-400 text-2xl mb-2"></i>
                             <div className="text-sm font-medium text-center text-[#0a63b0]">

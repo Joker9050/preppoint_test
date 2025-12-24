@@ -1,7 +1,8 @@
-// src/components/Navbar.jsx
 import React, { useState, useEffect, useCallback } from "react";
 import { FaEnvelope } from "react-icons/fa";
 import { debounce } from "lodash";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import Logo from "./helper/Logo";
 import LanguageSelector from "./helper/LanguageSelector";
 import AuthButton from "./helper/AuthButton";
@@ -9,7 +10,6 @@ import CategoryDropdown from "./helper/CategoryDropdown";
 import SearchBar from "./helper/SearchBar";
 import NavLinks from "./helper/NavLinks";
 import MobileMenu from "./helper/MobileMenu";
-
 
 // Temporary JSON data for testing search
 const tempContent = [
@@ -190,7 +190,7 @@ const Navbar = () => {
           item.content.toLowerCase().includes(query.toLowerCase()) ||
           item.category.toLowerCase().includes(query.toLowerCase())
         );
-        
+
         setSearchResults(results);
         setIsSearching(false);
       }, 500); // Simulate network delay
@@ -205,7 +205,7 @@ const Navbar = () => {
   // Handle search query changes
   const handleSearch = (query) => {
     setSearchQuery(query);
-    
+
     // Only search if query has at least 2 characters
     if (query.length >= 2) {
       performSearch(query);
@@ -247,18 +247,18 @@ const Navbar = () => {
         <div className="flex items-center space-x-2 xl:space-x-4">
           {/* Search Container - now full width on mobile */}
           <div className={`relative ${isMobileView ? 'w-full' : ''}`}>
-            <SearchBar 
-              isMobileView={isMobileView} 
-              onSearch={handleSearch} 
+            <SearchBar
+              isMobileView={isMobileView}
+              onSearch={handleSearch}
               onClear={clearSearch}
             />
-            
+
             {/* Centered Search Results Dropdown - different positioning for mobile */}
             {searchQuery.length >= 2 && (
               <div className={`
-                absolute 
-                ${isMobileView ? 
-                  'left-100 right-0 mx-auto w-[95vw] max-w-md' : 
+                absolute
+                ${isMobileView ?
+                  'left-100 right-0 mx-auto w-[95vw] max-w-md' :
                   'left-1/2 transform -translate-x-1/2 w-full max-w-md'
                 }
                 mt-2 bg-white rounded-md shadow-lg z-50 border border-gray-200

@@ -1,9 +1,8 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import logo from '../../assets/images/logo.png';
+import { useRouter } from 'next/router';
 
 const ForgotPassword = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const [step, setStep] = useState(1); // 1: email, 2: otp, 3: new password
   const [email, setEmail] = useState('');
   const [otp, setOtp] = useState('');
@@ -66,7 +65,7 @@ const ForgotPassword = () => {
     setTimeout(() => {
       setMessage('Password reset successfully. Redirecting to login...');
       setTimeout(() => {
-        navigate('/login');
+        router.push('/login');
       }, 3000);
       setLoading(false);
     }, 1000);
@@ -77,15 +76,15 @@ const ForgotPassword = () => {
       <div className="w-full flex items-center justify-center p-8">
         <div className="w-full max-w-md">
           <div className="flex justify-center mb-6">
-            <img 
-              src={logo} 
-              alt="Company Logo" 
-              className="h-12 w-auto" 
+            <img
+              src="/logo.png"
+              alt="Company Logo"
+              className="h-12 w-auto"
             />
           </div>
           
-          <button 
-            onClick={() => navigate('/login')}
+          <button
+            onClick={() => router.push('/login')}
             className="mb-4 flex items-center text-[#0a63b0] hover:text-blue-800 text-sm font-medium"
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">

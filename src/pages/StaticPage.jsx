@@ -17,8 +17,8 @@ const StaticPage = () => {
   const [tableOfContents, setTableOfContents] = useState([]);
   const [activeSection, setActiveSection] = useState('');
 
-  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost/prep_point/public/api/';
-  const API_KEY = import.meta.env.VITE_API_KEY || 'your_api_key_here';
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost/prep_point/public/api/';
+  const API_KEY = process.env.NEXT_PUBLIC_API_KEY || 'your_api_key_here';
 
   useEffect(() => {
     const loadPageContent = () => {

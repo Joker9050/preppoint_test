@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
-import Navbar from '../componets/Navbar';
 import Footer from '../componets/Footer';
 
 const StaticPage = () => {
@@ -17,8 +16,8 @@ const StaticPage = () => {
   const [tableOfContents, setTableOfContents] = useState([]);
   const [activeSection, setActiveSection] = useState('');
 
-  const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost/prep_point/public/api/';
-  const API_KEY = process.env.NEXT_PUBLIC_API_KEY || 'your_api_key_here';
+  // const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost/prep_point/public/api/';
+  // const API_KEY = process.env.NEXT_PUBLIC_API_KEY || 'your_api_key_here';
 
   useEffect(() => {
     const loadPageContent = () => {
@@ -191,7 +190,6 @@ const StaticPage = () => {
 
   return (
     <>
-      <Navbar />
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
         <div className="max-w-6xl mx-auto px-4 py-8">
           {/* Header */}

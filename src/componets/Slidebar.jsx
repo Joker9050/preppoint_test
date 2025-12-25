@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import "../assets/css/style.css";
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 const LearningSection = (props) => {
   const gridRef = useRef(null); // Unique ref for this component instance
 

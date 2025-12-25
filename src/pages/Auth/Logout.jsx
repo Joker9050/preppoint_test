@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import  {useAuth}  from './AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/router';
 
 const Logout = () => {
   const { logout } = useAuth();

@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/router';
 import axios from 'axios';
 import Navbar from '../componets/Navbar';
 import Footer from '../componets/Footer';
 
 const StaticPage = () => {
-  const { slug } = useParams();
-  const navigate = useNavigate();
+  const router = useRouter();
+  const { slug } = router.query;
   const [pageData, setPageData] = useState({
     title: '',
     content: '',
@@ -165,7 +165,7 @@ const StaticPage = () => {
   };
 
   const handleBackClick = () => {
-    navigate(-1);
+    router.back();
   };
 
   const formatDate = (dateString) => {

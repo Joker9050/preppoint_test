@@ -1,7 +1,7 @@
 // src/components/AuthButton.jsx
 import React, { useState, useRef } from "react";
 import { useAuth } from "../../pages/Auth/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/router";
 import profile from "../../assets/images/profile.png";
 
 const AuthButton = () => {

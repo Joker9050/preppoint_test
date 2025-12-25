@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { FaEnvelope } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import NavLinks from "./NavLinks";
 
 const MobileMenu = ({ isMobileView }) => {
@@ -142,7 +142,7 @@ const MobileMenu = ({ isMobileView }) => {
               {Object.entries(categories).map(([key, category]) => (
                 <Link
                   key={key}
-                  to="/categories"
+                  href="/categories"
                   className="block px-4 py-3 text-gray-700 hover:bg-gray-100 flex justify-between"
                   onClick={() => setIsCategoriesOpen(false)}
                 >

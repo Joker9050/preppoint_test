@@ -1,6 +1,7 @@
 // src/components/CategoryDropdown.jsx
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, useNavigate } from "react-router-dom";
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { 
   FaThLarge, 
   FaChevronDown, 
@@ -203,7 +204,7 @@ const CategoryDropdown = ({ isMobileView }) => {
   const handleCategoryHover = (category) => setActiveCategory(category);
 
   const handleViewMoreClick = (category) => {
-    navigate(`/categories#${category}`);
+    router.push(`/categories#${category}`);
     setIsDropdownOpen(false);
   };
 

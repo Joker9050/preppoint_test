@@ -1,11 +1,11 @@
 // src/components/Logo.jsx
 import React from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import logo from "../../assets/images/logo.png";
 
 const Logo = () => (
   <div className="logo-container transform hover:scale-105 transition-transform duration-300">
-    <Link to="/">
+    <Link href="/">
       <img
         src={logo}
         alt="Logo"

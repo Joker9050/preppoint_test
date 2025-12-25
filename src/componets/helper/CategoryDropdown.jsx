@@ -1,4 +1,4 @@
-// src/components/CategoryDropdown.jsx
+ // src/components/CategoryDropdown.jsx
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -67,7 +67,7 @@ const ITEM_ICONS = {
 };
 
 const CategoryDropdown = ({ isMobileView }) => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState("it");
   const [categories, setCategories] = useState(null);
@@ -311,7 +311,7 @@ const CategoryDropdown = ({ isMobileView }) => {
                     </div>
                   ))}
                   <Link
-                    to="/categories"
+                    href="/categories"
                     className="flex items-center py-2 sm:py-3 px-2 sm:px-3 rounded-md hover:bg-gray-100 transition-all duration-200 text-sm text-[#0a63b0] font-medium"
                     onClick={() => setIsDropdownOpen(false)}
                   >
@@ -378,9 +378,9 @@ const CategoryDropdown = ({ isMobileView }) => {
                                 </div>
                               ) : (
                                 <Link
-                                  to={
-                                    item === "Coming Soon" 
-                                      ? "#" 
+                                  href={
+                                    item === "Coming Soon"
+                                      ? "#"
                                       : `/categories/${activeCategory}/${item.toLowerCase().replace(/\s+/g, '-')}`
                                   }
                                   className="flex items-center group"
@@ -415,7 +415,7 @@ const CategoryDropdown = ({ isMobileView }) => {
                       <div className="space-y-2 sm:space-y-3">
                         {categoryData[activeCategory].items?.map((item) => (
                           <Link
-                            to={item === "Coming Soon" ? "#" : `/categories/${activeCategory}/${item.toLowerCase().replace(/\s+/g, '-')}`}
+                            href={item === "Coming Soon" ? "#" : `/categories/${activeCategory}/${item.toLowerCase().replace(/\s+/g, '-')}`}
                             className="flex items-center group"
                             key={item}
                             onClick={(e) => {

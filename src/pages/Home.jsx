@@ -7,8 +7,8 @@ import Slidebar from "../componets/Slidebar";
 import FeaturesSection from "../componets/FeaturesSection"
 import ContactUs from "../componets/ContactUs"
 import FeedbackSection from "../componets/FeedbackSection"
-const API_URL = import.meta.env.VITE_API_URL;
-const API_KEY = import.meta.env.VITE_API_KEY;
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 // Your provided JSON data
 const tempContent = [
   {

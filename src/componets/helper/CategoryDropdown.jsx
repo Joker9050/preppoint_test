@@ -16,8 +16,8 @@ import {
 } from "react-icons/fa";
 import { SiTypescript } from "react-icons/si";
 
-const API_URL = import.meta.env.VITE_API_URL;
-const API_KEY = import.meta.env.VITE_API_KEY;
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 // Static mappings for icons and colors (frontend only)
 const CATEGORY_ICONS = {
   "Information Technology": "💻",

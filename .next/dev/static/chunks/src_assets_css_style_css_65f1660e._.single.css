@@ -1,0 +1,64 @@
+/* [project]/src/assets/css/style.css [client] (css) */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: .5;
+  }
+}
+
+.animate-fadeIn {
+  animation: .2s ease-out forwards fadeIn;
+}
+
+.animate-bounce {
+  animation: 2s infinite bounce;
+}
+
+.animate-pulse {
+  animation: 2s cubic-bezier(.4, 0, .6, 1) infinite pulse;
+}
+
+#learningGrid::-webkit-scrollbar {
+  height: 6px;
+}
+
+#learningGrid::-webkit-scrollbar-track {
+  background: #f3f4f6;
+  border-radius: 3px;
+}
+
+#learningGrid::-webkit-scrollbar-thumb {
+  background: #0a63b0;
+  border-radius: 3px;
+}
+
+#learningGrid::-webkit-scrollbar-thumb:hover {
+  background: #084b8a;
+}
+
+/*# sourceMappingURL=src_assets_css_style_css_65f1660e._.single.css.map*/

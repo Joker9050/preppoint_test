@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/router';
 import { FiBook, FiCalendar, FiAward, FiBarChart2, FiClock, FiHelpCircle, FiAlertCircle } from 'react-icons/fi';
 import { motion } from 'framer-motion';
 import Navbar from '../../componets/Navbar';
@@ -11,7 +11,7 @@ const Dashboard = () => {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
+  const router = useRouter();
 
   // Format date to be more readable
   const formatDate = (dateString) => {
@@ -316,7 +316,7 @@ const Dashboard = () => {
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.98 }}
                   className="bg-yellow-50 hover:bg-yellow-100 text-yellow-700 p-3 rounded-lg flex flex-col items-center transition-colors"
-                  onClick={() => navigate('/logout')}
+                  onClick={() => router.push('/logout')}
                 >
                   <svg className="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />

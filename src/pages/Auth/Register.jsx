@@ -251,7 +251,7 @@ const Register = () => {
                       required
                       className={`w-full px-4 py-2.5 text-sm rounded-lg border ${
                         errors.password ? 'border-red-500' : 'border-gray-200'
-                      } focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all`}
+                      } focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all`} 
                       placeholder="Create a password (8+ characters)"
                       value={formData.password}
                       onChange={handleChange}
@@ -290,7 +290,7 @@ const Register = () => {
                       required
                       className={`w-full px-4 py-2.5 text-sm rounded-lg border ${
                         errors.confirmPassword ? 'border-red-500' : 'border-gray-200'
-                      } focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all`}
+                      } focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all`} 
                       placeholder="Confirm your password"
                       value={formData.confirmPassword}
                       onChange={handleChange}

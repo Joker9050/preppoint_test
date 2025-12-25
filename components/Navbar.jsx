@@ -161,6 +161,8 @@ const Navbar = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
   const [searchError, setSearchError] = useState(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
 
   // Check screen size for responsive behavior
   useEffect(() => {
@@ -221,7 +223,7 @@ const Navbar = () => {
     setSearchError(null);
   };
   return (
-    <header className="bg-white shadow-md sticky top-0 z-50 w-full">
+    <header className={`bg-white shadow-md ${mobileMenuOpen || isCategoriesOpen ? 'relative' : 'sticky top-0'} z-50 w-full`}>
       {/* Top blue bar */}
       <div className="bg-[#0a63b0] flex justify-between items-center px-2 sm:px-4 py-1 w-full">
         {!isMobileView && (
@@ -230,7 +232,13 @@ const Navbar = () => {
             mail: gargumesh463@gmail.com
           </div>
         )}
-        <MobileMenu isMobileView={isMobileView} />
+        <MobileMenu
+          isMobileView={isMobileView}
+          mobileMenuOpen={mobileMenuOpen}
+          setMobileMenuOpen={setMobileMenuOpen}
+          isCategoriesOpen={isCategoriesOpen}
+          setIsCategoriesOpen={setIsCategoriesOpen}
+        />
         <LanguageSelector />
         {isMobileView && <AuthButton />}
       </div>

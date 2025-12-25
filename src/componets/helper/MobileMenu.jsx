@@ -26,20 +26,38 @@ const MobileMenu = ({ isMobileView }) => {
     if (mobileMenuOpen) setMobileMenuOpen(false); // Close main menu if open
   };
 
-  // Handle clicks outside the mobile menu to close it
+  // Handle clicks/touches outside the mobile menu to close it
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        mobileMenuRef.current &&
-        !mobileMenuRef.current.contains(event.target)
-      ) {
+    const isEventInside = (event) => {
+      const path = event.composedPath ? event.composedPath() : (event.path || []);
+      if (!Array.isArray(path) || path.length === 0) {
+        const t = event.target;
+        return mobileMenuRef.current && mobileMenuRef.current.contains(t);
+      }
+      return mobileMenuRef.current && path.includes(mobileMenuRef.current);
+    };
+
+    const handlePointerDown = (event) => {
+      if (!isEventInside(event)) {
         setMobileMenuOpen(false);
         setIsCategoriesOpen(false);
       }
     };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+
+    document.addEventListener("mousedown", handlePointerDown);
+    document.addEventListener("touchstart", handlePointerDown);
+    return () => {
+      document.removeEventListener("mousedown", handlePointerDown);
+      document.removeEventListener("touchstart", handlePointerDown);
+    };
   }, []);
+
+  // Focus menu when it opens for accessibility
+  useEffect(() => {
+    if (mobileMenuOpen && mobileMenuRef.current) {
+      mobileMenuRef.current.focus();
+    }
+  }, [mobileMenuOpen]);
 
   return (
     isMobileView && (
@@ -49,6 +67,7 @@ const MobileMenu = ({ isMobileView }) => {
           className="text-gray-100 focus:outline-none"
           onClick={toggleMobileMenu}
           aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={mobileMenuOpen ? "true" : "false"}
         >
           {mobileMenuOpen ? (
             <svg
@@ -88,6 +107,7 @@ const MobileMenu = ({ isMobileView }) => {
           onClick={toggleCategories}
           className="flex items-center justify-between px-4 py-2 text-gray-100 rounded-md focus:outline-none"
           aria-label={isCategoriesOpen ? "Close categories" : "Open categories"}
+          aria-expanded={isCategoriesOpen ? "true" : "false"}
         >
           <span>Categories</span>
           <svg
@@ -180,6 +200,7 @@ const MobileMenu = ({ isMobileView }) => {
             transition={{ duration: 0.2 }}
             className="absolute top-10 left-0 right-0 bg-white shadow-lg w-full z-50"
             ref={mobileMenuRef}
+            tabIndex={-1}
           >
             <div className="px-4 py-3 w-full">
               <NavLinks />

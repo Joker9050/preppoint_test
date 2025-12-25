@@ -352,7 +352,7 @@ const PrepPointWelcome = () => {
 
   return (
     <>
-      <div className="h-screen bg-gradient-to-t from-blue-100 via-blue-400 to-blue-500 flex flex-col items-center justify-center p-4 relative">
+      <div className="min-h-screen bg-gradient-to-t from-blue-100 via-blue-400 to-blue-500 flex flex-col items-center justify-center p-4 relative pt-16">
         {/* Animated Search Bar */}
         <div className="w-full max-w-md mb-8">
           <form 

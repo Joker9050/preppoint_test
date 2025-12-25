@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/src/assets/css/style.css"],"sourcesContent":["/* navbar */\r\n\r\n@keyframes fadeIn {\r\n    from { opacity: 0; transform: translateY(-5px); }\r\n    to { opacity: 1; transform: translateY(0); }\r\n  }\r\n  @keyframes bounce {\r\n    0%, 100% { transform: translateY(0); }\r\n    50% { transform: translateY(-3px); }\r\n  }\r\n  @keyframes pulse {\r\n    0%, 100% { opacity: 1; }\r\n    50% { opacity: 0.5; }\r\n  }\r\n  .animate-fadeIn {\r\n    animation: fadeIn 0.2s ease-out forwards;\r\n  }\r\n  .animate-bounce {\r\n    animation: bounce 2s infinite;\r\n  }\r\n  .animate-pulse {\r\n    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;\r\n  }\r\n\r\n  /*slide baar  */\r\n\r\n  #learningGrid::-webkit-scrollbar {\r\n    height: 6px;\r\n  }\r\n  #learningGrid::-webkit-scrollbar-track {\r\n    background: #F3F4F6;\r\n    border-radius: 3px;\r\n  }\r\n  #learningGrid::-webkit-scrollbar-thumb {\r\n    background: #0a63b0;\r\n    border-radius: 3px;\r\n  }\r\n  #learningGrid::-webkit-scrollbar-thumb:hover {\r\n    background: #084b8a;\r\n  }"],"names":[],"mappings":"AAEA;;;;;;;;;;;;AAIE;;;;;;;;;;AAIA;;;;;;;;;;AAIA;;;;AAGA;;;;AAGA;;;;AAMA;;;;AAGA;;;;;AAIA;;;;;AAIA"}}]
+}

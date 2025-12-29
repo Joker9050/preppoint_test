@@ -5,8 +5,8 @@ const FeaturesSection = () => {
   const features = [
     {
       icon: <FiBook className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8" />,
-      title: "Comprehensive MCQs",
-      description: "Thousands of carefully curated multiple-choice questions covering all exam patterns."
+      title: "Comprehensive Practice Questions",
+      description: "Thousands of carefully curated practice questions covering all exam patterns."
     },
     {
       icon: <FiCode className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8" />,

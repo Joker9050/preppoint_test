@@ -1,9 +1,12 @@
+"use client"
+
 import React, { useState, useEffect, useCallback } from "react";
 import { FaEnvelope } from "react-icons/fa";
 import { debounce } from "lodash";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import Logo from "./helper/Logo";
+
+// Mount-only rendering to avoid hydration mismatches caused by DOM-mutating widgets or extensions
 import LanguageSelector from "./helper/LanguageSelector";
 import AuthButton from "./helper/AuthButton";
 import CategoryDropdown from "./helper/CategoryDropdown";
@@ -51,112 +54,119 @@ const tempContent = [
   {
     id: 6,
     title: "Machine Learning",
-    content: "Multiple choice questions on Machine Learning concepts",
+    content: "Comprehensive guide to Machine Learning concepts",
     url: "/machine-learning",
     category: "Technology"
   },
   {
     id: 7,
     title: "Computer Fundamentals",
-    content: "MCQs on basic computer knowledge and functions",
+    content: "Basic computer knowledge and functions",
     url: "/computer-fundamentals",
     category: "Technology"
   },
   {
     id: 8,
     title: "DBMS",
-    content: "Database Management Systems multiple choice questions",
+    content: "Database Management Systems concepts",
     url: "/dbms",
     category: "Technology"
   },
   {
     id: 9,
     title: "Operating System",
-    content: "MCQs on operating system concepts and architecture",
+    content: "Operating system concepts and architecture",
     url: "/operating-system",
     category: "Technology"
   },
   {
     id: 10,
     title: "Computer Networks",
-    content: "Networking basics and protocols in MCQ format",
+    content: "Networking basics and protocols",
     url: "/computer-networks",
     category: "Technology"
   },
   {
     id: 11,
     title: "PHP",
-    content: "PHP programming multiple choice questions",
+    content: "PHP programming practice questions",
     url: "/php",
     category: "Programming"
   },
   {
     id: 12,
     title: "CSS",
-    content: "Cascading Style Sheets MCQs for styling web pages",
+    content: "Cascading Style Sheets practice questions for styling web pages",
     url: "/css",
     category: "Web Development"
   },
   {
     id: 13,
     title: "C Programming",
-    content: "Multiple choice questions on C programming language",
+    content: "Practice questions on C programming language",
     url: "/c-programming",
     category: "Programming"
   },
   {
     id: 14,
     title: "Java",
-    content: "Java language fundamentals in MCQ format",
+    content: "Java language fundamentals practice questions",
     url: "/java",
     category: "Programming"
   },
   {
     id: 15,
     title: "JavaScript",
-    content: "Test your JavaScript knowledge with these MCQs",
+    content: "Test your JavaScript knowledge with practice questions",
     url: "/javascript",
     category: "Web Development"
   },
   {
     id: 16,
     title: "SSC CGL",
-    content: "MCQ practice set for SSC CGL examination",
+    content: "Study materials for SSC CGL examination",
     url: "/ssc-cgl",
     category: "Government Exams"
   },
   {
     id: 17,
     title: "SSC CHSL",
-    content: "MCQs covering topics for SSC CHSL preparation",
+    content: "Preparation materials for SSC CHSL",
     url: "/ssc-chsl",
     category: "Government Exams"
   },
   {
     id: 18,
     title: "SSC GD",
-    content: "Practice multiple choice questions for SSC GD",
+    content: "Study guides for SSC GD",
     url: "/ssc-gd",
     category: "Government Exams"
   },
   {
     id: 19,
     title: "SSC MTS",
-    content: "MCQs for SSC MTS exam preparation",
+    content: "Preparation resources for SSC MTS exam",
     url: "/ssc-mts",
     category: "Government Exams"
   },
   {
     id: 20,
     title: "SSC Stenographer",
-    content: "Multiple choice questions for SSC Stenographer exam",
+    content: "Study materials for SSC Stenographer exam",
     url: "/ssc-stenographer",
     category: "Government Exams"
   }
 ];
 
 const Navbar = () => {
- const [isMobileView, setIsMobileView] = useState(false);
+  // Prevent hydration mismatch by rendering a minimal skeleton until the component mounts on the client
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  // Keep hooks stable across all renders (do NOT declare them conditionally)
+  const [isMobileView, setIsMobileView] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
@@ -203,6 +213,17 @@ const Navbar = () => {
       setIsSearching(false);
     }
   }, 300), []);
+
+  // Render a static, non-interactive header skeleton during SSR/initial render to avoid DOM mutation mismatches
+  if (!mounted) {
+    return (
+      <header className={`bg-white shadow-md sticky top-0 z-50 w-full`}>
+        <div className="mx-auto py-3 px-4 w-full max-w-[1800px]">
+          <div className="h-10" />
+        </div>
+      </header>
+    )
+  }
 
   // Handle search query changes
   const handleSearch = (query) => {
@@ -266,7 +287,7 @@ const Navbar = () => {
               <div className={`
                 absolute
                 ${isMobileView ?
-                  'left-100 right-0 mx-auto w-[95vw] max-w-md' :
+                  'left-0 right-0 mx-auto w-[95vw] max-w-md' :
                   'left-1/2 transform -translate-x-1/2 w-full max-w-md'
                 }
                 mt-2 bg-white rounded-md shadow-lg z-50 border border-gray-200

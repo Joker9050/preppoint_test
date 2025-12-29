@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import {
   FaThLarge,
   FaChevronDown,
@@ -192,6 +192,7 @@ const CategoryDropdown = ({ isMobileView }) => {
         <button
           className="flex items-center space-x-2 bg-gray-100 px-4 py-2 rounded-lg min-w-[160px]"
           aria-expanded={false}
+          suppressHydrationWarning={true}
         >
           <FaThLarge className="text-[#0a63b0] text-lg" />
           <span className="font-semibold text-lg whitespace-nowrap">
@@ -341,7 +342,7 @@ const CategoryDropdown = ({ isMobileView }) => {
                                   href={
                                     item === "Coming Soon"
                                       ? "#"
-                                      : `/categories/${activeCategory}/${item.toLowerCase().replace(/\s+/g, '-')}`
+                                      : `/categories/${encodeURIComponent(item.toLowerCase().replace(/\s+/g, '-'))}`
                                   }
                                   className="flex items-center group"
                                   key={item}
@@ -375,7 +376,7 @@ const CategoryDropdown = ({ isMobileView }) => {
                       <div className="space-y-2 sm:space-y-3">
                         {categoryData[activeCategory].items?.map((item) => (
                           <Link
-                            href={item === "Coming Soon" ? "#" : `/categories/${activeCategory}/${item.toLowerCase().replace(/\s+/g, '-')}`}
+                            href={item === "Coming Soon" ? "#" : `/categories/${encodeURIComponent(item.toLowerCase().replace(/\s+/g, '-'))}`}
                             className="flex items-center group"
                             key={item}
                             onClick={(e) => {

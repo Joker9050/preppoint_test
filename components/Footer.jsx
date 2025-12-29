@@ -21,7 +21,7 @@ const Footer = () => {
               />
             </div>
             <p className="text-gray-300 mb-4">
-              PrepPoint is your trusted companion for smart MCQ preparation — offering structured MCQs, PYQs, and practice sets across IT subjects, government exams, and academic streams. Learn smarter. Practice deeper. Succeed faster.
+              PrepPoint is your trusted companion for smart preparation — offering structured study materials, practice sets, and resources across IT subjects, government exams, and academic streams. Learn smarter. Practice deeper. Succeed faster.
             </p>
             <div className="flex space-x-4">
               <a href="#" className="text-gray-400 hover:text-white transition-colors">

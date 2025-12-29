@@ -1,0 +1,1275 @@
+admin poratl ui:- 
+
+You are building the Admin Dashboard UI for PrepPoint, an education & exam-preparation platform that includes:
+
+MCQs (Subject → Topic → Subtopic)
+
+PYQs
+
+Mock Tests
+
+Job Updates (Govt + Private + IT)
+
+Users & Analytics
+
+Hybrid automation (scraping + manual review)
+
+The Admin UI must be:
+
+Clean
+
+Fast
+
+Scalable
+
+Non-technical friendly
+
+Ready for future AI features
+
+🔹 CORE ADMIN DESIGN PHILOSOPHY
+
+Admin should manage 10,000+ MCQs, jobs & users without confusion
+
+Key principles:
+
+Minimal clicks
+
+Clear hierarchy
+
+Powerful filters
+
+Draft → Review → Publish flow
+
+Everything traceable
+
+🔹 GLOBAL ADMIN LAYOUT
+1️⃣ LEFT SIDEBAR (Collapsible & Sticky)
+Branding
+
+PrepPoint Logo
+
+“Admin Panel” label
+
+Main Menu Sections
+
+(use icons + text)
+
+Dashboard
+
+Overview
+
+Analytics
+
+Content Management
+
+Subjects
+
+Topics
+
+Subtopics
+
+MCQs
+
+PYQs
+
+Mock Tests
+
+Job Updates
+
+Notifications
+
+Admit Cards
+
+Results
+
+Archives
+
+Automation
+
+Scraper Logs
+
+Draft Queue
+
+Change Detection
+
+Users
+
+User List
+
+Roles & Permissions
+
+Reports
+
+MCQ Performance
+
+Job Views
+
+Traffic
+
+Settings
+
+General
+
+SEO
+
+Integrations
+
+Security
+
+Sidebar must:
+
+Be scrollable
+
+Remember last open state
+
+Highlight active section
+
+🔹 TOP HEADER BAR
+
+Page title (dynamic)
+
+Global search (MCQs, Jobs, Users)
+
+Notification bell
+
+Admin profile dropdown
+
+My Account
+
+Logout
+
+🔹 DASHBOARD (HOME SCREEN)
+📊 KPI Cards (Top)
+
+Total Users
+
+Total MCQs
+
+Active Jobs
+
+Daily Visits
+
+New Drafts (scraped)
+
+📈 Charts
+
+MCQ usage per subject
+
+Job update traffic
+
+New users (7 / 30 days)
+
+⚡ Quick Actions
+
+Add MCQ
+
+Add Job
+
+Review Draft
+
+Create Mock Test
+
+🔹 SUBJECT → TOPIC → SUBTOPIC MANAGER (CRITICAL)
+Tree View Layout (Left)
+IT
+ ├── Java
+ │    ├── Basics
+ │    ├── OOP
+ │    └── Collections
+ ├── Python
+Government
+ ├── SSC
+ ├── Banking
+
+Right Panel
+
+Edit name
+
+SEO slug
+
+Status (Active / Hidden)
+
+Order / Priority
+
+Add child node
+
+Drag & Drop supported
+
+🔹 MCQ MANAGEMENT UI (CORE FEATURE)
+MCQ LIST PAGE
+
+Table or Card View
+
+Filters:
+
+Subject
+
+Topic
+
+Difficulty
+
+Type (Text / Image / Code)
+
+Status (Draft / Published)
+
+MCQ CARD
+
+Question preview
+
+Options preview
+
+Correct option indicator
+
+Difficulty badge
+
+Edit / Delete / Preview buttons
+
+MCQ CREATION / EDIT PAGE
+Question Editor
+
+Rich text editor
+
+Supports:
+
+Code blocks
+
+Images
+
+Math (future)
+
+Question type:
+
+Single correct
+
+Multi correct
+
+True / False
+
+Options Section
+
+Option text / image / code
+
+Mark correct option
+
+Auto validation
+
+Explanation Section
+
+Collapsible editor
+
+Code + image support
+
+Visibility toggle
+
+Meta Data
+
+Subject → Topic → Subtopic
+
+Difficulty
+
+Tags
+
+Language
+
+Marks
+
+Buttons
+
+Save Draft
+
+Publish
+
+Preview
+
+🔹 JOB UPDATE ADMIN UI
+Job List
+
+Title
+
+Organization
+
+Status badge
+
+Last updated
+
+View / Edit
+
+Job Editor
+
+Tabs:
+
+Overview
+
+Important Dates
+
+Eligibility
+
+Vacancy
+
+Links (Apply, Admit, Result)
+
+SEO
+
+Timeline Manager
+
+Enable/disable stages:
+
+Notification
+
+Apply
+
+Admit Card
+
+Result
+
+🔹 SCRAPING & AUTOMATION PANEL
+Scraper Dashboard
+
+Source website
+
+Last checked
+
+Status
+
+Changes detected
+
+Draft Review Queue
+
+Auto scraped entries
+
+Highlight changes
+
+Approve / Edit / Reject
+
+🔹 USER MANAGEMENT
+
+User list
+
+Filters (Active / Blocked)
+
+View progress
+
+Reset password
+
+Assign roles
+
+🔹 SETTINGS PANEL
+General
+
+Site name
+
+Logo
+
+Theme
+
+SEO
+
+Meta templates
+
+Sitemap
+
+Indexing control
+
+Integrations
+
+Google Analytics
+
+Email
+
+Telegram / WhatsApp (future)
+
+Security
+
+Admin roles
+
+Activity logs
+
+🔹 UX / UI DESIGN RULES
+
+Tailwind / Material style
+
+Soft shadows
+
+Blue primary
+
+Consistent spacing
+
+Keyboard friendly
+
+Mobile responsive (tablet view at least)
+
+🔹 FUTURE-READY FEATURES (UI placeholders)
+
+AI MCQ generation
+
+AI job summarizer
+
+Bulk upload (CSV)
+
+Version history
+
+Content approval workflow
+
+🎯 FINAL ADMIN GOAL
+
+Create an Admin UI that:
+
+Handles massive content
+
+Supports automation
+
+Requires minimum training
+
+Scales for years
+
+
+
+
+PrepPoint Admin Portal - Next.js Implementation
+I'll create a modern, scalable Next.js 14 admin dashboard with App Router, TypeScript, and Tailwind CSS. This implementation follows your requirements exactly.
+
+Project Structure
+text
+preppoint-admin/
+├── app/
+│   ├── layout.tsx
+│   ├── page.tsx (Dashboard)
+│   ├── dashboard/
+│   │   ├── layout.tsx (Shared admin layout)
+│   │   ├── page.tsx (Dashboard home)
+│   │   └── analytics/page.tsx
+│   ├── content/
+│   │   ├── subjects/
+│   │   │   ├── page.tsx
+│   │   │   └── [id]/page.tsx
+│   │   ├── mcqs/
+│   │   │   ├── page.tsx
+│   │   │   └── create/page.tsx
+│   │   └── jobs/
+│   │       ├── page.tsx
+│   │       └── [id]/page.tsx
+│   ├── automation/
+│   │   ├── page.tsx
+│   │   └── drafts/page.tsx
+│   ├── users/
+│   │   ├── page.tsx
+│   │   └── [id]/page.tsx
+│   └── settings/
+│       ├── page.tsx
+│       └── security/page.tsx
+├── components/
+│   ├── layout/
+│   │   ├── Sidebar.tsx
+│   │   ├── Header.tsx
+│   │   └── KpiCards.tsx
+│   ├── content/
+│   │   ├── SubjectTree.tsx
+│   │   ├── McqTable.tsx
+│   │   └── JobEditor.tsx
+│   └── ui/
+│       ├── DataTable.tsx
+│       ├── SearchBar.tsx
+│       └── StatsCard.tsx
+├── lib/
+│   ├── utils.ts
+│   └── constants.ts
+├── types/
+│   └── index.ts
+├── public/
+├── package.json
+├── tailwind.config.js
+├── tsconfig.json
+└── next.config.js
+Core Implementation Files
+1. app/layout.tsx - Root Layout
+tsx
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import './globals.css';
+import { AdminProvider } from '@/contexts/AdminContext';
+
+const inter = Inter({ subsets: ['latin'] });
+
+export const metadata: Metadata = {
+  title: 'PrepPoint Admin',
+  description: 'Education platform admin dashboard',
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <body className={`${inter.className} bg-gray-50`}>
+        <AdminProvider>
+          {children}
+        </AdminProvider>
+      </body>
+    </html>
+  );
+}
+2. app/dashboard/layout.tsx - Admin Layout
+tsx
+'use client';
+
+import { useState } from 'react';
+import Sidebar from '@/components/layout/Sidebar';
+import Header from '@/components/layout/Header';
+import { DashboardProvider } from '@/contexts/DashboardContext';
+
+export default function DashboardLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+
+  return (
+    <DashboardProvider>
+      <div className="flex min-h-screen">
+        <Sidebar isOpen={sidebarOpen} setIsOpen={setSidebarOpen} />
+        
+        <div className={`flex-1 transition-all duration-300 ${
+          sidebarOpen ? 'ml-64' : 'ml-20'
+        }`}>
+          <Header 
+            sidebarOpen={sidebarOpen} 
+            toggleSidebar={() => setSidebarOpen(!sidebarOpen)} 
+          />
+          
+          <main className="p-6">
+            {children}
+          </main>
+        </div>
+      </div>
+    </DashboardProvider>
+  );
+}
+3. components/layout/Sidebar.tsx
+tsx
+'use client';
+
+import { useState } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import {
+  FiHome,
+  FiBook,
+  FiFileText,
+  FiBriefcase,
+  FiUsers,
+  FiSettings,
+  FiBarChart2,
+  FiCpu,
+  FiChevronLeft,
+  FiChevronRight
+} from 'react-icons/fi';
+import { AiOutlineQuestionCircle } from 'react-icons/ai';
+import { MdOutlineNotifications } from 'react-icons/md';
+
+interface SidebarProps {
+  isOpen: boolean;
+  setIsOpen: (open: boolean) => void;
+}
+
+export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
+  const pathname = usePathname();
+  
+  const menuItems = [
+    {
+      title: 'Dashboard',
+      icon: <FiHome />,
+      path: '/dashboard',
+      subItems: [
+        { title: 'Overview', path: '/dashboard' },
+        { title: 'Analytics', path: '/dashboard/analytics' },
+      ]
+    },
+    {
+      title: 'Content Management',
+      icon: <FiBook />,
+      subItems: [
+        { title: 'Subjects', path: '/content/subjects' },
+        { title: 'MCQs', path: '/content/mcqs', badge: '9,842' },
+        { title: 'PYQs', path: '/content/pyqs' },
+        { title: 'Mock Tests', path: '/content/mock-tests' },
+        { title: 'Job Updates', path: '/content/jobs', badge: '342' },
+      ]
+    },
+    {
+      title: 'Automation',
+      icon: <FiCpu />,
+      subItems: [
+        { title: 'Scraper Logs', path: '/automation/logs' },
+        { title: 'Draft Queue', path: '/automation/drafts', badge: '47' },
+        { title: 'Change Detection', path: '/automation/changes' },
+      ]
+    },
+    {
+      title: 'Users',
+      icon: <FiUsers />,
+      subItems: [
+        { title: 'User List', path: '/users', badge: '12,543' },
+        { title: 'Roles & Permissions', path: '/users/roles' },
+      ]
+    },
+    {
+      title: 'Settings',
+      icon: <FiSettings />,
+      subItems: [
+        { title: 'General', path: '/settings' },
+        { title: 'SEO', path: '/settings/seo' },
+        { title: 'Integrations', path: '/settings/integrations' },
+        { title: 'Security', path: '/settings/security' },
+      ]
+    }
+  ];
+
+  return (
+    <aside className={`
+      fixed inset-y-0 left-0 z-50 bg-white border-r border-gray-200
+      transition-all duration-300 flex flex-col
+      ${isOpen ? 'w-64' : 'w-20'}
+    `}>
+      {/* Logo */}
+      <div className="p-6 border-b">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center">
+            <div className="w-10 h-10 rounded-lg bg-blue-600 flex items-center justify-center">
+              <FiBook className="text-white text-xl" />
+            </div>
+            {isOpen && (
+              <div className="ml-3">
+                <h1 className="text-xl font-bold text-gray-800">PrepPoint</h1>
+                <p className="text-xs text-gray-500">Admin Panel</p>
+              </div>
+            )}
+          </div>
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="p-1 rounded-lg hover:bg-gray-100"
+          >
+            {isOpen ? (
+              <FiChevronLeft className="text-gray-500" />
+            ) : (
+              <FiChevronRight className="text-gray-500" />
+            )}
+          </button>
+        </div>
+      </div>
+
+      {/* Navigation */}
+      <nav className="flex-1 overflow-y-auto py-4">
+        {menuItems.map((item, index) => (
+          <div key={index} className="mb-2">
+            {isOpen && item.title && (
+              <h3 className="px-4 text-xs uppercase font-semibold text-gray-400 mb-2">
+                {item.title}
+              </h3>
+            )}
+            {item.subItems?.map((subItem, subIndex) => {
+              const isActive = pathname === subItem.path;
+              return (
+                <Link
+                  key={subIndex}
+                  href={subItem.path}
+                  className={`
+                    flex items-center px-4 py-3 text-sm transition-colors
+                    ${isActive 
+                      ? 'bg-blue-50 text-blue-600 border-r-2 border-blue-600' 
+                      : 'text-gray-700 hover:bg-gray-50'
+                    }
+                  `}
+                >
+                  <span className={`${isOpen ? 'mr-3' : 'mx-auto'}`}>
+                    {subIndex === 0 && React.cloneElement(item.icon, { 
+                      className: isActive ? 'text-blue-600' : 'text-gray-500'
+                    })}
+                  </span>
+                  {isOpen && (
+                    <>
+                      <span className="flex-1">{subItem.title}</span>
+                      {subItem.badge && (
+                        <span className={`
+                          px-2 py-1 text-xs rounded-full
+                          ${isActive 
+                            ? 'bg-blue-100 text-blue-800' 
+                            : 'bg-gray-100 text-gray-800'
+                          }
+                        `}>
+                          {subItem.badge}
+                        </span>
+                      )}
+                    </>
+                  )}
+                </Link>
+              );
+            })}
+          </div>
+        ))}
+      </nav>
+
+      {/* User Profile */}
+      <div className="p-4 border-t">
+        <div className="flex items-center">
+          <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
+            <FiUsers className="text-blue-600" />
+          </div>
+          {isOpen && (
+            <>
+              <div className="ml-3 flex-1">
+                <p className="text-sm font-medium text-gray-700">Admin User</p>
+                <p className="text-xs text-gray-500">Super Admin</p>
+              </div>
+              <button className="text-gray-500 hover:text-gray-700">
+                <FiSettings />
+              </button>
+            </>
+          )}
+        </div>
+      </div>
+    </aside>
+  );
+}
+4. components/layout/Header.tsx
+tsx
+'use client';
+
+import { useState } from 'react';
+import { FiSearch, FiBell, FiHelpCircle } from 'react-icons/fi';
+import { AiOutlineUser } from 'react-icons/ai';
+
+interface HeaderProps {
+  sidebarOpen: boolean;
+  toggleSidebar: () => void;
+}
+
+export default function Header({ sidebarOpen, toggleSidebar }: HeaderProps) {
+  const [searchQuery, setSearchQuery] = useState('');
+  
+  return (
+    <header className="sticky top-0 z-40 bg-white border-b border-gray-200">
+      <div className="px-6 py-4 flex items-center justify-between">
+        <div className="flex items-center">
+          <h1 className="text-2xl font-bold text-gray-800">Dashboard Overview</h1>
+          <div className="ml-4 px-3 py-1 bg-blue-50 text-blue-700 text-sm rounded-full">
+            <span className="hidden md:inline">Last updated: Today, 10:30 AM</span>
+          </div>
+        </div>
+        
+        <div className="flex items-center space-x-4">
+          {/* Global Search */}
+          <div className="relative hidden md:block">
+            <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+            <input
+              type="text"
+              placeholder="Search MCQs, Jobs, Users..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="pl-10 pr-4 py-2 w-64 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
+          </div>
+          
+          {/* Quick Actions */}
+          <div className="flex items-center space-x-2">
+            <button className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg">
+              <FiHelpCircle size={20} />
+            </button>
+            
+            <button className="relative p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg">
+              <FiBell size={20} />
+              <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+            </button>
+            
+            {/* User Dropdown */}
+            <div className="relative group">
+              <button className="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-100">
+                <div className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 flex items-center justify-center">
+                  <AiOutlineUser className="text-white" />
+                </div>
+                <div className="hidden md:block text-left">
+                  <p className="text-sm font-medium text-gray-700">Admin User</p>
+                  <p className="text-xs text-gray-500">admin@preppoint.com</p>
+                </div>
+              </button>
+              
+              <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                <div className="py-1">
+                  <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    My Profile
+                  </a>
+                  <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    Account Settings
+                  </a>
+                  <div className="border-t border-gray-100">
+                    <a href="#" className="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100">
+                      Logout
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+  );
+}
+5. app/dashboard/page.tsx - Dashboard Home
+tsx
+'use client';
+
+import { useState } from 'react';
+import KpiCards from '@/components/layout/KpiCards';
+import QuickActions from '@/components/dashboard/QuickActions';
+import ChartsSection from '@/components/dashboard/ChartsSection';
+import RecentActivity from '@/components/dashboard/RecentActivity';
+
+export default function DashboardPage() {
+  const [timeRange, setTimeRange] = useState('7d');
+
+  return (
+    <div className="space-y-6">
+      {/* Page Header */}
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold text-gray-900">Dashboard Overview</h1>
+          <p className="text-gray-600 mt-2">Monitor your platform performance and manage content efficiently</p>
+        </div>
+        <div className="flex items-center space-x-4">
+          <select
+            value={timeRange}
+            onChange={(e) => setTimeRange(e.target.value)}
+            className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option value="24h">Last 24 Hours</option>
+            <option value="7d">Last 7 Days</option>
+            <option value="30d">Last 30 Days</option>
+            <option value="90d">Last 90 Days</option>
+          </select>
+          <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+            Generate Report
+          </button>
+        </div>
+      </div>
+
+      {/* KPI Cards */}
+      <KpiCards />
+
+      {/* Quick Actions */}
+      <QuickActions />
+
+      {/* Charts Section */}
+      <ChartsSection timeRange={timeRange} />
+
+      {/* Recent Activity & Draft Queue */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <RecentActivity />
+        
+        {/* Draft Queue */}
+        <div className="bg-white rounded-xl border border-gray-200 p-6">
+          <div className="flex items-center justify-between mb-6">
+            <h3 className="text-lg font-semibold text-gray-900">Draft Queue</h3>
+            <span className="px-3 py-1 bg-yellow-100 text-yellow-800 text-sm rounded-full">
+              47 pending review
+            </span>
+          </div>
+          
+          <div className="space-y-4">
+            {[
+              { type: 'MCQ', count: 28, source: 'Auto-scraped' },
+              { type: 'Job Update', count: 12, source: 'Manual Entry' },
+              { type: 'PYQ', count: 7, source: 'Auto-scraped' },
+            ].map((item, index) => (
+              <div key={index} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                <div>
+                  <p className="font-medium text-gray-900">{item.type}</p>
+                  <p className="text-sm text-gray-500">{item.source}</p>
+                </div>
+                <div className="text-right">
+                  <p className="font-bold text-gray-900">{item.count} items</p>
+                  <button className="mt-2 text-sm text-blue-600 hover:text-blue-800">
+                    Review →
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          <button className="w-full mt-6 py-3 border-2 border-dashed border-gray-300 rounded-lg text-gray-600 hover:text-gray-900 hover:border-gray-400 transition-colors">
+            + Add New Content Manually
+          </button>
+        </div>
+      </div>
+
+      {/* Future AI Features Placeholder */}
+      <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border border-blue-200 p-6">
+        <div className="flex items-center justify-between">
+          <div>
+            <h3 className="text-lg font-semibold text-gray-900">AI-Powered Features (Coming Soon)</h3>
+            <p className="text-gray-600 mt-2">Enhance your content creation with AI assistance</p>
+          </div>
+          <span className="px-4 py-2 bg-blue-600 text-white text-sm rounded-full">
+            Beta
+          </span>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+          <div className="p-4 bg-white rounded-lg border border-gray-200">
+            <div className="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center mb-3">
+              <span className="text-blue-600 font-bold">AI</span>
+            </div>
+            <h4 className="font-medium text-gray-900">MCQ Generator</h4>
+            <p className="text-sm text-gray-500 mt-1">Generate MCQs from topics automatically</p>
+          </div>
+          
+          <div className="p-4 bg-white rounded-lg border border-gray-200">
+            <div className="w-10 h-10 rounded-lg bg-green-100 flex items-center justify-center mb-3">
+              <span className="text-green-600 font-bold">AI</span>
+            </div>
+            <h4 className="font-medium text-gray-900">Job Summarizer</h4>
+            <p className="text-sm text-gray-500 mt-1">Automatically summarize job notifications</p>
+          </div>
+          
+          <div className="p-4 bg-white rounded-lg border border-gray-200">
+            <div className="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center mb-3">
+              <span className="text-purple-600 font-bold">AI</span>
+            </div>
+            <h4 className="font-medium text-gray-900">Content Analyzer</h4>
+            <p className="text-sm text-gray-500 mt-1">Analyze content quality and relevance</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+6. components/content/McqTable.tsx - MCQ Management
+tsx
+'use client';
+
+import { useState } from 'react';
+import { FiEdit, FiTrash2, FiEye, FiFilter } from 'react-icons/fi';
+import { AiOutlineCheckCircle, AiOutlineCloseCircle } from 'react-icons/ai';
+
+interface MCQ {
+  id: string;
+  question: string;
+  subject: string;
+  topic: string;
+  difficulty: 'Easy' | 'Medium' | 'Hard';
+  type: 'Text' | 'Image' | 'Code';
+  status: 'Draft' | 'Published' | 'Archived';
+  lastUpdated: string;
+}
+
+export default function McqTable() {
+  const [selectedFilters, setSelectedFilters] = useState({
+    subject: '',
+    difficulty: '',
+    type: '',
+    status: '',
+  });
+  
+  const [mcqs] = useState<MCQ[]>([
+    {
+      id: '1',
+      question: 'What is the time complexity of binary search?',
+      subject: 'Computer Science',
+      topic: 'Algorithms',
+      difficulty: 'Easy',
+      type: 'Text',
+      status: 'Published',
+      lastUpdated: '2024-01-15',
+    },
+    // Add more mock data
+  ]);
+
+  const difficultyColors = {
+    Easy: 'bg-green-100 text-green-800',
+    Medium: 'bg-yellow-100 text-yellow-800',
+    Hard: 'bg-red-100 text-red-800',
+  };
+
+  const statusColors = {
+    Draft: 'bg-gray-100 text-gray-800',
+    Published: 'bg-blue-100 text-blue-800',
+    Archived: 'bg-purple-100 text-purple-800',
+  };
+
+  return (
+    <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+      {/* Table Header with Filters */}
+      <div className="p-6 border-b border-gray-200">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-2xl font-bold text-gray-900">MCQ Management</h2>
+          <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 flex items-center">
+            <FiEdit className="mr-2" />
+            Add New MCQ
+          </button>
+        </div>
+        
+        {/* Filters */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Subject
+            </label>
+            <select className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+              <option value="">All Subjects</option>
+              <option value="cs">Computer Science</option>
+              <option value="math">Mathematics</option>
+              <option value="gov">Government Exams</option>
+            </select>
+          </div>
+          
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Difficulty
+            </label>
+            <select className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+              <option value="">All Levels</option>
+              <option value="easy">Easy</option>
+              <option value="medium">Medium</option>
+              <option value="hard">Hard</option>
+            </select>
+          </div>
+          
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Type
+            </label>
+            <select className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+              <option value="">All Types</option>
+              <option value="text">Text</option>
+              <option value="image">Image</option>
+              <option value="code">Code</option>
+            </select>
+          </div>
+          
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Status
+            </label>
+            <select className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+              <option value="">All Status</option>
+              <option value="draft">Draft</option>
+              <option value="published">Published</option>
+              <option value="archived">Archived</option>
+            </select>
+          </div>
+        </div>
+        
+        {/* Search and Bulk Actions */}
+        <div className="flex items-center justify-between mt-6">
+          <div className="flex items-center space-x-4">
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="Search MCQs..."
+                className="pl-10 pr-4 py-2 w-64 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              <FiFilter className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+            </div>
+            <span className="text-gray-600">9,842 MCQs found</span>
+          </div>
+          
+          <div className="flex items-center space-x-2">
+            <button className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">
+              Export CSV
+            </button>
+            <button className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">
+              Bulk Edit
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* MCQ Table */}
+      <div className="overflow-x-auto">
+        <table className="w-full">
+          <thead className="bg-gray-50">
+            <tr>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Question
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Subject/Topic
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Difficulty
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Status
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Actions
+              </th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-gray-200">
+            {mcqs.map((mcq) => (
+              <tr key={mcq.id} className="hover:bg-gray-50">
+                <td className="px-6 py-4">
+                  <div className="flex items-center">
+                    <div className="ml-4">
+                      <div className="text-sm font-medium text-gray-900">
+                        {mcq.question.length > 100 
+                          ? `${mcq.question.substring(0, 100)}...` 
+                          : mcq.question}
+                      </div>
+                      <div className="text-sm text-gray-500">
+                        {mcq.type} • Updated {mcq.lastUpdated}
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td className="px-6 py-4">
+                  <div className="text-sm text-gray-900">{mcq.subject}</div>
+                  <div className="text-sm text-gray-500">{mcq.topic}</div>
+                </td>
+                <td className="px-6 py-4">
+                  <span className={`px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${difficultyColors[mcq.difficulty]}`}>
+                    {mcq.difficulty}
+                  </span>
+                </td>
+                <td className="px-6 py-4">
+                  <span className={`px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${statusColors[mcq.status]}`}>
+                    {mcq.status}
+                  </span>
+                </td>
+                <td className="px-6 py-4 text-sm font-medium">
+                  <div className="flex space-x-2">
+                    <button className="text-blue-600 hover:text-blue-900">
+                      <FiEye size={18} />
+                    </button>
+                    <button className="text-green-600 hover:text-green-900">
+                      <FiEdit size={18} />
+                    </button>
+                    <button className="text-red-600 hover:text-red-900">
+                      <FiTrash2 size={18} />
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Pagination */}
+      <div className="px-6 py-4 border-t border-gray-200">
+        <div className="flex items-center justify-between">
+          <div className="text-sm text-gray-700">
+            Showing <span className="font-medium">1</span> to <span className="font-medium">10</span> of{' '}
+            <span className="font-medium">9,842</span> results
+          </div>
+          <div className="flex space-x-2">
+            <button className="px-3 py-1 border border-gray-300 rounded-md text-sm hover:bg-gray-50">
+              Previous
+            </button>
+            <button className="px-3 py-1 bg-blue-600 text-white border border-blue-600 rounded-md text-sm">
+              1
+            </button>
+            <button className="px-3 py-1 border border-gray-300 rounded-md text-sm hover:bg-gray-50">
+              2
+            </button>
+            <button className="px-3 py-1 border border-gray-300 rounded-md text-sm hover:bg-gray-50">
+              3
+            </button>
+            <button className="px-3 py-1 border border-gray-300 rounded-md text-sm hover:bg-gray-50">
+              Next
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+7. tailwind.config.js
+javascript
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    './pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
+  ],
+  theme: {
+    extend: {
+      colors: {
+        primary: {
+          50: '#eff6ff',
+          100: '#dbeafe',
+          200: '#bfdbfe',
+          300: '#93c5fd',
+          400: '#60a5fa',
+          500: '#3b82f6',
+          600: '#2563eb',
+          700: '#1d4ed8',
+          800: '#1e40af',
+          900: '#1e3a8a',
+        },
+      },
+      animation: {
+        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'slide-in': 'slideIn 0.3s ease-out',
+      },
+      keyframes: {
+        slideIn: {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(0)' },
+        },
+      },
+    },
+  },
+  plugins: [],
+}
+8. package.json
+json
+{
+  "name": "preppoint-admin",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "14.0.0",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-icons": "^4.11.0",
+    "recharts": "^2.10.0",
+    "date-fns": "^3.0.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.0.0",
+    "tailwind-merge": "^2.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "autoprefixer": "^10.0.0",
+    "eslint": "^8",
+    "eslint-config-next": "14.0.0",
+    "postcss": "^8",
+    "tailwindcss": "^3.3.0",
+    "typescript": "^5"
+  }
+}
+9. next.config.js
+javascript
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+  swcMinify: true,
+  images: {
+    domains: ['localhost'],
+  },
+}
+
+module.exports = nextConfig

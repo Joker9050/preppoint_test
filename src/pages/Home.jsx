@@ -49,105 +49,105 @@ const tempContent = [
   {
     id: 6,
     title: "Machine Learning",
-    content: "Multiple choice questions on Machine Learning concepts",
+    content: "Practice questions on Machine Learning concepts",
     url: "/machine-learning",
     category: "Technology"
   },
   {
     id: 7,
     title: "Computer Fundamentals",
-    content: "MCQs on basic computer knowledge and functions",
+    content: "Practice questions on basic computer knowledge and functions",
     url: "/computer-fundamentals",
     category: "Technology"
   },
   {
     id: 8,
     title: "DBMS",
-    content: "Database Management Systems multiple choice questions",
+    content: "Database Management Systems practice questions",
     url: "/dbms",
     category: "Technology"
   },
   {
     id: 9,
     title: "Operating System",
-    content: "MCQs on operating system concepts and architecture",
+    content: "Practice questions on operating system concepts and architecture",
     url: "/operating-system",
     category: "Technology"
   },
   {
     id: 10,
     title: "Computer Networks",
-    content: "Networking basics and protocols in MCQ format",
+    content: "Networking basics and protocols practice questions",
     url: "/computer-networks",
     category: "Technology"
   },
   {
     id: 11,
     title: "PHP",
-    content: "PHP programming multiple choice questions",
+    content: "PHP programming practice questions",
     url: "/php",
     category: "Programming"
   },
   {
     id: 12,
     title: "CSS",
-    content: "Cascading Style Sheets MCQs for styling web pages",
+    content: "Cascading Style Sheets practice questions for styling web pages",
     url: "/css",
     category: "Web Development"
   },
   {
     id: 13,
     title: "C Programming",
-    content: "Multiple choice questions on C programming language",
+    content: "Practice questions on C programming language",
     url: "/c-programming",
     category: "Programming"
   },
   {
     id: 14,
     title: "Java",
-    content: "Java language fundamentals in MCQ format",
+    content: "Java language fundamentals practice questions",
     url: "/java",
     category: "Programming"
   },
   {
     id: 15,
     title: "JavaScript",
-    content: "Test your JavaScript knowledge with these MCQs",
+    content: "Test your JavaScript knowledge with practice questions",
     url: "/javascript",
     category: "Web Development"
   },
   {
     id: 16,
     title: "SSC CGL",
-    content: "MCQ practice set for SSC CGL examination",
+    content: "Practice set for SSC CGL examination",
     url: "/ssc-cgl",
     category: "Government Exams"
   },
   {
     id: 17,
     title: "SSC CHSL",
-    content: "MCQs covering topics for SSC CHSL preparation",
+    content: "Practice questions covering topics for SSC CHSL preparation",
     url: "/ssc-chsl",
     category: "Government Exams"
   },
   {
     id: 18,
     title: "SSC GD",
-    content: "Practice multiple choice questions for SSC GD",
+    content: "Practice questions for SSC GD",
     url: "/ssc-gd",
     category: "Government Exams"
   },
   {
     id: 19,
     title: "SSC MTS",
-    content: "MCQs for SSC MTS exam preparation",
+    content: "Practice questions for SSC MTS exam preparation",
     url: "/ssc-mts",
     category: "Government Exams"
   },
   {
     id: 20,
     title: "SSC Stenographer",
-    content: "Multiple choice questions for SSC Stenographer exam",
+    content: "Practice questions for SSC Stenographer exam",
     url: "/ssc-stenographer",
     category: "Government Exams"
   }
@@ -173,10 +173,10 @@ const PrepPointWelcome = () => {
 
   
   const phrases = [
-    "Search for MCQs...",
-    "Find practice questions...",
+    "Search for practice questions...",
+    "Find PYQs...",
     "Type a topic name...",
-    "Search PYOs...",
+    "Search practice sets...",
   ];
   
   // Static learning data
@@ -436,7 +436,7 @@ const PrepPointWelcome = () => {
             Welcome to PrepPoint
           </h1>
           <p className="text-gray-100 mb-3">
-            Your one-stop solution for detailed MCQs and PYQs Practice
+            Your one-stop solution for detailed PYQs and Practice Sets
           </p>
 
           <motion.button

@@ -31,6 +31,7 @@ const LanguageSelector = () => {
       <button
         onClick={toggleDropdown}
         className="flex items-center space-x-1 sm:space-x-2 px-2 sm:px-4 py-1 rounded-lg text-white bg-[#0a63b0] focus:outline-none transition-all duration-300"
+        suppressHydrationWarning={true}
       >
         <Flag
           code={language === "en-IN" ? "IN" : language}

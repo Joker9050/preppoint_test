@@ -5,7 +5,6 @@ import Register from "../pages/Auth/Register";
 import Logout from "../pages/Auth/Logout";
 import Category from "../pages/Category"
 import { useAuth } from "../pages/Auth/AuthContext";
-import Mcq from "../pages/Mcq";
 import Dashboard from "../pages/User/Dashboard";
 import Profile from "../pages/User/Profile";
 import Contact from "../pages/Contact";
@@ -23,7 +22,6 @@ export default function AppRoutes() {
         <Route path="/register" element={<Register />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="/categories" element={<Category/>} />
-        <Route path="/mcq" element={<Mcq/>} />
         <Route path="/dashboard" element={<Dashboard/>}/>
         <Route path="/profile" element={<Profile />} />
         <Route path="/contact" element={<Contact />} />

@@ -77,7 +77,7 @@ function KPICard({ title, value, change, trend, comparison, insight, target, ico
 
 function DateRangePicker() {
   return (
-    <select className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+    <select className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" suppressHydrationWarning>
       <option value="today">Today</option>
       <option value="7d">Last 7 Days</option>
       <option value="30d">Last 30 Days</option>
@@ -98,6 +98,7 @@ function ComparisonToggle() {
           ? 'bg-blue-600 text-white'
           : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
       }`}
+      suppressHydrationWarning
     >
       Compare Period
     </button>
@@ -107,7 +108,7 @@ function ComparisonToggle() {
 function ExportDropdown() {
   return (
     <div className="relative">
-      <button className="px-3 py-2 border border-gray-300 rounded-lg text-sm hover:bg-gray-50 flex items-center">
+      <button className="px-3 py-2 border border-gray-300 rounded-lg text-sm hover:bg-gray-50 flex items-center" suppressHydrationWarning>
         <FiDownload className="mr-2" />
         Export
       </button>
@@ -117,7 +118,7 @@ function ExportDropdown() {
 
 function SegmentSelector() {
   return (
-    <select className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+    <select className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" suppressHydrationWarning>
       <option value="all">All Users</option>
       <option value="new">New Users</option>
       <option value="returning">Returning Users</option>
@@ -539,6 +540,7 @@ export default function AnalyticsPage() {
             value={refreshInterval}
             onChange={(e) => setRefreshInterval(e.target.value)}
             className="px-3 py-2 border border-gray-300 rounded-lg text-sm"
+            suppressHydrationWarning
           >
             <option value="15s">Auto-refresh: 15s</option>
             <option value="30s">Auto-refresh: 30s</option>
@@ -546,7 +548,7 @@ export default function AnalyticsPage() {
             <option value="5m">Auto-refresh: 5m</option>
             <option value="off">Auto-refresh: Off</option>
           </select>
-          <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 flex items-center">
+          <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 flex items-center" suppressHydrationWarning>
             <FiRefreshCw className="mr-2" />
             Refresh Data
           </button>
@@ -636,7 +638,7 @@ export default function AnalyticsPage() {
             <h3 className="text-xl font-semibold text-gray-900">Data Management</h3>
             <p className="text-gray-600 mt-1">Export reports or schedule automatic delivery</p>
           </div>
-          <button className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">
+          <button className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700" suppressHydrationWarning>
             Schedule Report
           </button>
         </div>

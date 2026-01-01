@@ -69,7 +69,8 @@ export default function MCQContent({ mcqs, topicTitle, subtopicTitle }: {
                 {Object.entries(mcq.options).map(([key, value]) => {
                   const isSelected = selectedAnswers[mcq.id] === key
                   const shouldShowCorrect = isAnswered && key === mcq.correct
-                  
+                  const isWrongSelected = isSelected && isAnswered && !isCorrect
+
                   return (
                     <button
                       key={key}
@@ -77,21 +78,23 @@ export default function MCQContent({ mcqs, topicTitle, subtopicTitle }: {
                       onClick={() => handleAnswerSelect(mcq.id, key)}
                       className={`
                         text-left border rounded-xl px-4 py-3 transition-all duration-200
-                        ${isSelected 
-                          ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-100' 
+                        ${isSelected && !isAnswered
+                          ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-100'
                           : 'border-gray-200 hover:bg-gray-50'
                         }
                         ${shouldShowCorrect ? 'border-green-500 bg-green-50' : ''}
+                        ${isWrongSelected ? 'border-red-500 bg-red-50 ring-2 ring-red-100' : ''}
                       `}
                     >
                       <div className="flex items-center">
                         <span className={`
                           inline-flex items-center justify-center w-6 h-6 mr-3 rounded-full text-sm font-medium
-                          ${isSelected 
-                            ? 'bg-blue-500 text-white' 
+                          ${isSelected && !isAnswered
+                            ? 'bg-blue-500 text-white'
                             : 'bg-gray-100 text-gray-700'
                           }
                           ${shouldShowCorrect ? 'bg-green-500 text-white' : ''}
+                          ${isWrongSelected ? 'bg-red-500 text-white' : ''}
                         `}>
                           {key}
                         </span>

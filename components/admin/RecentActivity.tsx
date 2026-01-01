@@ -34,7 +34,7 @@ export default function RecentActivity() {
     <div className="bg-white rounded-xl border border-gray-200 p-6">
       <div className="flex items-center justify-between mb-6">
         <h3 className="text-lg font-semibold text-gray-900">Recent Activity</h3>
-        <button className="text-sm text-blue-600 hover:text-blue-800">View All</button>
+        <button className="text-sm text-blue-600 hover:text-blue-800" suppressHydrationWarning>View All</button>
       </div>
 
       <div className="space-y-4">

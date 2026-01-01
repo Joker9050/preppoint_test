@@ -99,6 +99,7 @@ export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="p-1 rounded-lg hover:bg-gray-100"
+            suppressHydrationWarning
           >
             {isOpen ? (
               <FiChevronLeft className="text-gray-500" />
@@ -172,7 +173,7 @@ export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
                 <p className="text-sm font-medium text-gray-700">Admin User</p>
                 <p className="text-xs text-gray-500">Super Admin</p>
               </div>
-              <button className="text-gray-500 hover:text-gray-700">
+              <button className="text-gray-500 hover:text-gray-700" suppressHydrationWarning>
                 <FiSettings />
               </button>
             </>

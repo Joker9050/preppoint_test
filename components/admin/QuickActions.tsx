@@ -47,6 +47,7 @@ export default function QuickActions() {
             key={index}
             onClick={action.action}
             className={`p-4 rounded-lg border-2 ${action.color} hover:shadow-md transition-all duration-200 text-left group`}
+            suppressHydrationWarning
           >
             <div className="w-10 h-10 rounded-lg bg-white flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
               {action.icon}

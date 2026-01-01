@@ -78,10 +78,10 @@ export default function UsersManagement() {
           <p className="text-gray-600 mt-2">Manage user accounts, roles, and permissions</p>
         </div>
         <div className="flex space-x-3">
-          <button className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">
+          <button className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50" suppressHydrationWarning>
             Export Users
           </button>
-          <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+          <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700" suppressHydrationWarning>
             Add User
           </button>
         </div>
@@ -146,13 +146,13 @@ export default function UsersManagement() {
       <div className="bg-white rounded-xl border border-gray-200 p-6">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl font-semibold text-gray-900">Filters</h2>
-          <button className="text-sm text-gray-500 hover:text-gray-700">Clear All</button>
+          <button className="text-sm text-gray-500 hover:text-gray-700" suppressHydrationWarning>Clear All</button>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">Role</label>
-            <select className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <select className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" suppressHydrationWarning>
               <option value="">All Roles</option>
               <option value="admin">Admin</option>
               <option value="moderator">Moderator</option>
@@ -162,7 +162,7 @@ export default function UsersManagement() {
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">Status</label>
-            <select className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <select className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" suppressHydrationWarning>
               <option value="">All Status</option>
               <option value="active">Active</option>
               <option value="blocked">Blocked</option>
@@ -176,12 +176,13 @@ export default function UsersManagement() {
               type="text"
               placeholder="Search by name or email..."
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              suppressHydrationWarning
             />
           </div>
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">Join Date</label>
-            <select className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <select className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" suppressHydrationWarning>
               <option value="">All Time</option>
               <option value="today">Today</option>
               <option value="week">This Week</option>
@@ -198,7 +199,7 @@ export default function UsersManagement() {
             <h2 className="text-xl font-semibold text-gray-900">Users</h2>
             <div className="flex items-center space-x-4">
               <span className="text-sm text-gray-600">{users.length} users found</span>
-              <button className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 flex items-center">
+              <button className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 flex items-center" suppressHydrationWarning>
                 <FiFilter className="mr-2" />
                 Bulk Actions
               </button>
@@ -275,13 +276,13 @@ export default function UsersManagement() {
                   </td>
                   <td className="px-6 py-4 text-sm font-medium">
                     <div className="flex space-x-2">
-                      <button className="text-blue-600 hover:text-blue-900">
+                      <button className="text-blue-600 hover:text-blue-900" suppressHydrationWarning>
                         <FiEye size={18} />
                       </button>
-                      <button className="text-green-600 hover:text-green-900">
+                      <button className="text-green-600 hover:text-green-900" suppressHydrationWarning>
                         <FiEdit size={18} />
                       </button>
-                      <button className="text-red-600 hover:text-red-900">
+                      <button className="text-red-600 hover:text-red-900" suppressHydrationWarning>
                         <FiTrash2 size={18} />
                       </button>
                     </div>
@@ -300,13 +301,13 @@ export default function UsersManagement() {
               <span className="font-medium">3</span> results
             </div>
             <div className="flex space-x-2">
-              <button className="px-3 py-1 border border-gray-300 rounded-md text-sm hover:bg-gray-50">
+              <button className="px-3 py-1 border border-gray-300 rounded-md text-sm hover:bg-gray-50" suppressHydrationWarning>
                 Previous
               </button>
-              <button className="px-3 py-1 bg-blue-600 text-white border border-blue-600 rounded-md text-sm">
+              <button className="px-3 py-1 bg-blue-600 text-white border border-blue-600 rounded-md text-sm" suppressHydrationWarning>
                 1
               </button>
-              <button className="px-3 py-1 border border-gray-300 rounded-md text-sm hover:bg-gray-50">
+              <button className="px-3 py-1 border border-gray-300 rounded-md text-sm hover:bg-gray-50" suppressHydrationWarning>
                 Next
               </button>
             </div>

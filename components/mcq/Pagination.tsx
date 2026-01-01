@@ -26,10 +26,6 @@ export default function Pagination({ onPrev, onNext, disablePrev, disableNext }:
         Previous
       </button>
 
-      <div className="text-sm text-gray-500">
-        Navigate through topics
-      </div>
-
       <button
         type="button"
         disabled={disableNext}

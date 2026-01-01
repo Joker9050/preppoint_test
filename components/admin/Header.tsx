@@ -13,6 +13,7 @@ export default function Header({ sidebarOpen, toggleSidebar }: HeaderProps) {
           <button
             onClick={toggleSidebar}
             className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
+            suppressHydrationWarning
           >
             <svg
               className="w-6 h-6 text-gray-600"
@@ -32,7 +33,7 @@ export default function Header({ sidebarOpen, toggleSidebar }: HeaderProps) {
         </div>
 
         <div className="flex items-center space-x-4">
-          <button className="p-2 rounded-lg hover:bg-gray-100 transition-colors">
+          <button className="p-2 rounded-lg hover:bg-gray-100 transition-colors" suppressHydrationWarning>
             <svg
               className="w-6 h-6 text-gray-600"
               fill="none"
@@ -48,7 +49,7 @@ export default function Header({ sidebarOpen, toggleSidebar }: HeaderProps) {
             </svg>
           </button>
 
-          <button className="p-2 rounded-lg hover:bg-gray-100 transition-colors">
+          <button className="p-2 rounded-lg hover:bg-gray-100 transition-colors" suppressHydrationWarning>
             <svg
               className="w-6 h-6 text-gray-600"
               fill="none"

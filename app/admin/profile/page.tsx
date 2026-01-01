@@ -15,12 +15,12 @@ export default function ProfilePage() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [activePage, setActivePage] = useState('profile');
   const [showPassword, setShowPassword] = useState(false);
-  const dropdownRef = useRef(null);
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
 
   // Close dropdown when clicking outside
   useEffect(() => {
-    function handleClickOutside(event) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setDropdownOpen(false);
       }
     }

@@ -636,7 +636,7 @@ function Pagination({ currentPage, totalPages, onPageChange }: {
     const rangeWithDots: (number | string)[] = [];
 
     for (let i = Math.max(2, currentPage - delta); i <= Math.min(totalPages - 1, currentPage + delta); i++) {
-      range.push(i);
+      range.push(i as number);
     }
 
     if (currentPage - delta > 2) {
